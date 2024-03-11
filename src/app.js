@@ -1,18 +1,18 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-// import sequelize from './utils/database';
+const sequelize = require('./utils/database');
+const User = require('./models/user');
 
-const app = express();
+const app = express();2
 
 app.use(bodyParser.json());
-// app.listen(3000)
 
-// sequelize
-//   .sync()
-//   .then((result) => {
-//     app.listen(3000);
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   });
+sequelize
+  .sync()
+  .then(result => {
+    app.listen(3000);
+  })
+  .catch(err => {
+    console.log(err);
+  });

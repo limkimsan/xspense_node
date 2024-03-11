@@ -1,7 +1,8 @@
 const { Sequelize } = require('sequelize');
 
-const sequelize = new Sequelize('xspense-db', 'root', 'MySql@2024', {
+const sequelize = new Sequelize('xspense-track', 'root', 'MySql@2024', {
   dialect: 'mysql',
   host: 'localhost',
 });
-export default sequelize;
+
+module.exports = sequelize;
