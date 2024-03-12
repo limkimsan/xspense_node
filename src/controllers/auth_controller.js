@@ -1,5 +1,13 @@
-exports.login = (req, res, next) => {
-  console.log('====== login ========')
+exports.getLogin = (req, res, next) => {
+  res.render('auth/login', {
+    oldInput: {
+      email: '',
+      password: ''
+    }
+  });
+}
 
-  res.render('auth/login');
+exports.postLogin = (req, res, next) => {
+  const email = req.body.email;
+  const password = req.body.password;
 }

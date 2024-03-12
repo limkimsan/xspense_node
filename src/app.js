@@ -12,7 +12,7 @@ const app = express();2
 app.set('view engine', 'ejs');  // Using ejs as the view engine
 app.set('views', 'src/views');   // implies that Express should look for view files inside a directory named "views"
 
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'assets')));
 app.use(routes);
 app.use(authRoutes);
