@@ -1,6 +1,7 @@
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
+const session = require('express-session');
 
 const sequelize = require('./utils/database');
 const User = require('./models/user');
@@ -14,6 +15,13 @@ app.set('views', 'src/views');   // implies that Express should look for view fi
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'assets')));
+
+app.use(session({
+  secret: 'my secret',
+  resave: false,
+  saveUninitialized: false
+}));
+
 app.use(routes);
 app.use(authRoutes);
 
