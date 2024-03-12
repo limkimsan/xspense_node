@@ -1,0 +1,37 @@
+<%- include('../includes/head.ejs') %>
+</head>
+<%- include('../includes/body.ejs') %>
+  <div class="row">
+    <div class="col s6 align-self-center">
+      <h1 class="text-center">Welcome to Xspense</h1>
+      <h4 class="text-center">Your personal spending recorder</h4>
+    </div>
+    <div class="col s6 card">
+      <div class="card-body">
+        <div class="row">
+          <form class="col s12">
+            <div class="row mt-2">
+              <label class="form-label" for="email">Email</label>
+              <input class="form-control" type="email" name="email" id="email" />
+            </div>
+            <div class="row mt-2">
+              <label class="form-label" for="password">Password</label>
+              <input class="form-control" type="password" name="password" id="password" />
+            </div>
+            <div class="row gap-2">
+              <button type="submit" class="btn btn-primary mt-4">Login</button>
+        
+              <div class="mt-3 row justify-content-center"
+                style="background-color: lightgray; height: 0.5px; position: relative;">
+                <div style="background-color: white; width: 50px; position: absolute; top: -12px; color: lightgray;">OR</div>
+              </div>
+            </div>
+            <div class="text-center">
+              <a href="/signup" class="btn btn-success mt-4">Create an account</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+<%- include('../includes/end.ejs') %>
