@@ -5,12 +5,9 @@ const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session);
 const { doubleCsrf } = require("csrf-csrf");
 const cookieParser = require('cookie-parser');
-const crypto = require('crypto');
 
 const sequelize = require('./utils/database');
-const User = require('./models/user');
-const { createNewUser } = require('./models/user');
-const routes = require('./routes/route');
+const mainRoutes = require('./routes/main_route');
 const authRoutes = require('./routes/auth_route');
 const userConst = require('./constants/user_constant');
 
@@ -51,11 +48,14 @@ app.use(cookieParser(SECRET));
 app.use(doubleCsrfProtection);
 
 app.use((req, res, next) => {
+  res.locals.isLoggedIn = req.session.isLoggedIn;
+  res.locals.isPrimaryAdmin = (!!req.session.user && req.session.user.role == userConst.role.primary_admin) ? true : false;
+  // res.locals.user = req.session.user;
   res.locals.csrfToken = req.csrfToken();
   next();
 });
 
-app.use(routes);
+app.use(mainRoutes);
 app.use(authRoutes);
 
 sequelize

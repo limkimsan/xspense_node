@@ -1,0 +1,30 @@
+<nav class="navbar navbar-expand-lg bg-light">
+  <div class="container-fluid container">
+    <a href="/" class="navbar-brand">Xspense</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <% if (isLoggedIn && isPrimaryAdmin) { %>
+          <a href="/users" class="nav-link active">Users</a>
+          <a href="/categories" class="nav-link active">Categories</a>
+          <a href="/api_keys" class="nav-link">API Keys</a>
+        <% } %>
+        <a href="/transactions" class="nav-link">Transactions</a>
+        <% if (isLoggedIn) { %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Profile
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="/" class="dropdown-item">Edit</a></li>
+              <li><a href="/logout" class="dropdown-item">Logout</a></li>
+            </ul>
+          </li>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</nav>

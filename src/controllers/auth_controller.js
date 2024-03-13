@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 const User = require('../models/user');
 
 const renderLoginPage = (res, email) => {
-  res.render('/login', {
+  res.render('auth/login', {
     oldInput: {
       email: email,
       password: ''
