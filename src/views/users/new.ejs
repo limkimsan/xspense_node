@@ -1,0 +1,49 @@
+<%- include('../includes/head.ejs') %>
+  </head>
+  <%- include('../includes/body.ejs') %>
+    <div class="container card">
+      <div class="card-body">
+        <h1 class="card-title text-center">Create new user</h1>
+        
+        <div class="row">
+          <form class="col s12" action="/users/new" method="POST">
+            <div class="row mt-2">
+              <div class="col s12 input-field">
+                <label class="form-label" for="name">Name</label>
+                <input class="form-control" name="name" id="name" placeholder="Enter your name" />
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col s12 input-field">
+                <label class="form-label" for="name">Email</label>
+                <input class="form-control" type="email" name="email" id="email" placeholder="Enter your email" />
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col s12 input-field">
+                <label class="form-label" for="name">Password</label>
+                <input class="form-control" type="password" name="password" id="password" placeholder="Enter your password" />
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col s12 input-field">
+                <label class="form-label" for="name">Password confirmation</label>
+                <input class="form-control" type="password" name="password_confirmation" id="password_confirmation"
+                  placeholder="Enter confirmation password" />
+              </div>
+            </div>
+        
+            <div class="row mt-4 me-0 justify-content-end">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+              <div class="col-1">
+                <a href="/" class="btn btn-danger">Cancel</a>
+              </div>
+              <div class="col-1">
+                <button type="submit" class="btn btn-primary">Create</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <%- include('../includes/end.ejs') %>
