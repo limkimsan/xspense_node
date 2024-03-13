@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 const User = require('../models/user');
 
 const renderLoginPage = (res, email) => {
-  res.render('/login', {
+  res.render('auth/login', {
     oldInput: {
       email: email,
       password: ''
@@ -50,5 +50,11 @@ exports.postLogin = (req, res, next) => {
       .catch(err => {
         res.redirect('/login');
       });
+  });
+}
+
+exports.postLogout = (req, res, next) => {
+  req.session.destroy(() => {
+    res.redirect('/login');
   });
 }
