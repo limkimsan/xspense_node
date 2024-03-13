@@ -5,11 +5,14 @@ const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session);
 const { doubleCsrf } = require("csrf-csrf");
 const cookieParser = require('cookie-parser');
+const crypto = require('crypto');
 
 const sequelize = require('./utils/database');
 const User = require('./models/user');
+const { createNewUser } = require('./models/user');
 const routes = require('./routes/route');
 const authRoutes = require('./routes/auth_route');
+const userConst = require('./constants/user_constant');
 
 const SECRET = 'my secret';
 const app = express();
@@ -26,6 +29,7 @@ const {
   doubleCsrfProtection, // This is the default CSRF protection middleware.
 } = doubleCsrf({
   getSecret: () => SECRET,
+  size: 32,
   getTokenFromRequest: (req) => {
     return req.body._csrf;
   },
