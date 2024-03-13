@@ -50,7 +50,7 @@ app.use(doubleCsrfProtection);
 app.use((req, res, next) => {
   res.locals.isLoggedIn = req.session.isLoggedIn;
   res.locals.isPrimaryAdmin = (!!req.session.user && req.session.user.role == userConst.role.primary_admin) ? true : false;
-  // res.locals.user = req.session.user;
+  res.locals.user = req.session.user;
   res.locals.csrfToken = req.csrfToken();
   next();
 });
