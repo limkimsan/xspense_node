@@ -3,8 +3,8 @@
   <%- include('../includes/body.ejs') %>
     <div class="container card">
       <div class="card-body">
-        <h1 class="card-title text-center">Create new user</h1>
-        
+        <h1 class="card-title text-center">Edit user</h1>
+
         <div class="row">
           <form class="col s12" action="<%= path == '/users' ? '/users/new' : '/signup' %>" method="POST">
             <%- include('./_form.ejs') %>
@@ -12,4 +12,4 @@
         </div>
       </div>
     </div>
-    <%- include('../includes/end.ejs') %>
+<%- include('../includes/end.ejs') %>

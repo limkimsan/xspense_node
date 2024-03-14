@@ -20,4 +20,6 @@ router.get('/users/new', isAuth, userController.getCreateUser)
 
 router.post('/users/new', validateUser(), userController.postCreateUser)
 
+router.get('/users/:userId', isAuth, userController.getEditUser)
+
 module.exports = router;

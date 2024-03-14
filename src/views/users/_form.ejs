@@ -1,0 +1,38 @@
+<div class="row mt-2">
+  <div class="col s12 input-field">
+    <label class="form-label" for="name">Name</label>
+    <input class="form-control" name="name" id="name" placeholder="Enter your name" value="<%= oldInput.name %>" />
+  </div>
+</div>
+<div class="row mt-2">
+  <div class="col s12 input-field">
+    <label class="form-label" for="name">Email</label>
+    <input class="form-control" type="email" name="email" id="email" placeholder="Enter your email"
+      value="<%= oldInput.email %>" />
+  </div>
+</div>
+<% if (!isEdit) { %>
+  <div class="row mt-2">
+    <div class="col s12 input-field">
+      <label class="form-label" for="name">Password</label>
+      <input class="form-control" type="password" name="password" id="password" placeholder="Enter your password" />
+    </div>
+  </div>
+  <div class="row mt-2">
+    <div class="col s12 input-field">
+      <label class="form-label" for="name">Password confirmation</label>
+      <input class="form-control" type="password" name="password_confirmation" id="password_confirmation"
+        placeholder="Enter confirmation password" />
+    </div>
+  </div>
+<% } %>
+
+<div class="row mt-4 me-0 justify-content-end">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+  <div class="col-1">
+    <a href="/users" class="btn btn-danger">Cancel</a>
+  </div>
+  <div class="col-1">
+    <button type="submit" class="btn btn-primary"><%= isEdit ? 'Update' : 'Create' %></button>
+  </div>
+</div>

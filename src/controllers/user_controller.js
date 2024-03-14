@@ -21,6 +21,7 @@ exports.getUsers = (req, res, next) => {
 exports.getCreateUser = (req, res, next) => {
   res.render('users/new', {
     path: '/users',
+    isEdit: false,
     oldInput: {
       name: '',
       email: ''
@@ -69,4 +70,31 @@ exports.postCreateUser = (req, res, next) => {
     .catch(err => {
       res.redirect('/signup');
     })
+}
+
+exports.getEditUser = (req, res, next) => {
+  console.log('== query = ', req.query);
+  const userId = req.params.userId;
+  User.findOne({
+    where: { id: req.params.userId }
+  })
+  .then(user => {
+    if (!user)
+      return res.redirect('/users');
+
+    return user.dataValues;
+  })
+  .then(user => {
+    console.log('== edit user = ', user)
+    res.render('users/edit', {
+      path: '/users',
+      isEdit: true,
+      oldInput: {
+        name: user.name,
+        email: user.email,
+      },
+      message: '',
+      messageType: ''
+    });
+  })
 }
