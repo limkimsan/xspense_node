@@ -73,8 +73,6 @@ exports.postCreateUser = (req, res, next) => {
 }
 
 exports.getEditUser = (req, res, next) => {
-  console.log('== query = ', req.query);
-  const userId = req.params.userId;
   User.findOne({
     where: { id: req.params.userId }
   })
@@ -85,9 +83,9 @@ exports.getEditUser = (req, res, next) => {
     return user.dataValues;
   })
   .then(user => {
-    console.log('== edit user = ', user)
     res.render('users/edit', {
       path: '/users',
+      userId: req.params.userId,
       isEdit: true,
       oldInput: {
         name: user.name,
@@ -96,5 +94,36 @@ exports.getEditUser = (req, res, next) => {
       message: '',
       messageType: ''
     });
+  })
+}
+
+exports.postEditUser = (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    const message = errors.array()[0].msg;
+    return res.render('users/edit', {
+      path: '/users',
+      userId: req.params.userId,
+      isEdit: true,
+      oldInput: {
+        name: req.body.name,
+        email: req.body.email == '@' ? '' : req.body.email
+      },
+      message: message,
+      messageType: 'error'
+    });
+  }
+
+  User.update({
+    name: req.body.name || '',
+    email: req.body.email,
+  }, {
+    where: { id: req.params.userId }
+  })
+  .then(user => {
+    res.status(200).redirect('/users');
+  })
+  .catch(err => {
+    console.log(err);
   })
 }
