@@ -1,27 +1,31 @@
-const Joi = require('joi');
+const { check, body } =  require('express-validator');
 
-exports.userSchema = Joi.object({
-  name: Joi.any(),
-  email: Joi.string().email().required(),
-  password: Joi.string().alphanum().required(),
-  // password_confirmation: Joi.string().valid(Joi.ref('password')).required()
-  //   .messages({
-  //     'string.invalid': 'Password confirmation does not match',
-  //     'string.empty': 'Password confirmation does not match'
-  //   })
-  password_confirmation: Joi.string().min(3).max(30).required()
-    .messages({
-      'string.empty': 'Name is required!',
-      'string.min': 'Name must be at least {min} characters long',
-      'string.max': 'Name must be less than {max} characters long',
-    }),
-});
+const User = require('../models/user');
 
-exports.validateRequest = (schema, req, res, next) => {
-  const { error } = schema.validate(req.body);
-  if (error) {
-    const messages = error.details.map((detail) => detail.message).join(',');
-    return res.status(422).json({ error: messages });
-  }
-  next();
+exports.validateUser = () => {
+  return [
+    check('email')
+      .isEmail()
+      .withMessage('Please enter a valid email address')
+      .custom((value, { req }) => {
+        return User.findOne({ where: { email: value } })
+          .then(user => {
+            if (!!user)
+              throw new Error('Email is already existed');
+          })
+      })
+      .normalizeEmail(),
+    body('password', 'Please enter a password with only number and text and at least 6 characters.')
+      .isLength({min: 6})
+      .isAlphanumeric()
+      .trim(),
+    body('password_confirmation')
+      .trim()
+      .custom((value, { req }) => {
+        if(value != req.body.password)
+          throw new Error('Passwords have to match!');
+
+        return true;
+      })
+  ]
 }

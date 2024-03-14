@@ -1,18 +1,19 @@
 const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
+const { validationResult } = require('express-validator');
 
 const User = require('../models/user');
 const userConst = require('../constants/user_constant');
 
 exports.postCreateUser = (req, res, next) => {
-  const { error } = userSchema.validate(req.body);
-  if (error) {
-    console.log('== error message = ', error);
-    const messages = error.details.map((detail) => detail.message).join(',');
-    // console.log('== error message = ', messages);
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    console.log('== errors = ', errors);
+    const message = errors.array()[0].msg;
+    console.log('== error message = ', message);
     res.render('users/new', {
       path: '/users',
-      message: messages,
+      message: message,
       messageType: 'error'
     });
   }
