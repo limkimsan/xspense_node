@@ -15,4 +15,6 @@ router.get('/', isAuth, (req, res, next) => {
 
 router.post('/users/new', validateUser(), userController.postCreateUser)
 
+router.get('/users', isAuth, userController.getUsers);
+
 module.exports = router;

@@ -5,6 +5,19 @@ const { validationResult } = require('express-validator');
 const User = require('../models/user');
 const userConst = require('../constants/user_constant');
 
+exports.getUsers = (req, res, next) => {
+  User.findAll()
+    .then(users => {
+      res.render('users/index', {
+        path: '/users',
+        users: users,
+        roles: ['primary admin', 'admin', 'normal'],
+        message: '',
+        messageType: ''
+      });
+    });
+}
+
 exports.postCreateUser = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {

@@ -22,3 +22,7 @@ html, body {
 .nav-link {
   color: white !important;
 }
+
+.nav-link-active {
+  color: lightgreen !important;
+}
