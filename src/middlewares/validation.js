@@ -30,6 +30,21 @@ exports.validateUser = () => {
   ]
 }
 
+exports.validateEditUser = () => {
+  return [
+    body('email')
+      .isEmail()
+      .withMessage('Please enter a valid email address')
+      .custom((value, { req }) => {
+        return User.findOne({ where: { email: value } })
+          .then(user => {
+            if (!!user && user.id != req.params.userId)
+              throw new Error('Email is already existed');
+          })
+      })
+  ]
+}
+
 exports.validateLogin = () => {
   return [
     body('email')
