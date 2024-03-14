@@ -7,7 +7,9 @@ const renderLoginPage = (res, email) => {
     oldInput: {
       email: email,
       password: ''
-    }
+    },
+    message: '',
+    messageType: ''
   });
 }
 
@@ -16,7 +18,9 @@ exports.getLogin = (req, res, next) => {
     oldInput: {
       email: '',
       password: '',
-    }
+    },
+    message: '',
+    messageType: ''
   });
 }
 
@@ -60,5 +64,8 @@ exports.postLogout = (req, res, next) => {
 }
 
 exports.getSignup = (req, res, next) => {
-  res.render('users/new')
+  res.render('users/new', {
+    message: '',
+    messageType: ''
+  })
 }
