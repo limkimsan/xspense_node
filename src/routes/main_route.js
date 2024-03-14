@@ -8,13 +8,16 @@ const router = express.Router();
 
 router.get('/', isAuth, (req, res, next) => {
   res.render('home/index', {
+    path: '',
     message: '',
     messageType: ''
   });
 });
 
-router.post('/users/new', validateUser(), userController.postCreateUser)
-
 router.get('/users', isAuth, userController.getUsers);
+
+router.get('/users/new', isAuth, userController.getCreateUser)
+
+router.post('/users/new', validateUser(), userController.postCreateUser)
 
 module.exports = router;
