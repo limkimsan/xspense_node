@@ -72,6 +72,10 @@ exports.postLogout = (req, res, next) => {
 exports.getSignup = (req, res, next) => {
   res.render('users/new', {
     path: '/signup',
+    oldInput: {
+      name: '',
+      email: ''
+    },
     message: '',
     messageType: ''
   })

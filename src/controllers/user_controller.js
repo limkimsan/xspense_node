@@ -11,6 +11,10 @@ exports.postCreateUser = (req, res, next) => {
     const message = errors.array()[0].msg;
     return res.render('users/new', {
       path: '/users',
+      oldInput: {
+        name: req.body.name,
+        email: req.body.email
+      },
       message: message,
       messageType: 'error'
     });

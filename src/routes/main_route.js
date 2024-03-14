@@ -7,7 +7,10 @@ const { validateUser } = require('../middlewares/validation');
 const router = express.Router();
 
 router.get('/', isAuth, (req, res, next) => {
-  res.render('home/index');
+  res.render('home/index', {
+    message: '',
+    messageType: ''
+  });
 });
 
 router.post('/users/new', validateUser(), userController.postCreateUser)
