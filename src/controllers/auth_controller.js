@@ -1,15 +1,16 @@
 const bcrypt = require('bcryptjs');
+const { validationResult } = require('express-validator');
 
 const User = require('../models/user');
 
-const renderLoginPage = (res, email) => {
+const renderLoginPage = (res, email, message, messageType) => {
   res.render('auth/login', {
     oldInput: {
       email: email,
       password: ''
     },
-    message: '',
-    messageType: ''
+    message: message,
+    messageType: messageType
   });
 }
 
@@ -27,7 +28,12 @@ exports.getLogin = (req, res, next) => {
 exports.postLogin = (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
-  req.session.isLoggedIn = true;
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {    
+    const message = errors.array()[0].msg;
+    return renderLoginPage(res, '', message, 'error');
+  }
 
   User.findOne({
     where: {
@@ -36,7 +42,7 @@ exports.postLogin = (req, res, next) => {
   })
   .then(user => {
     if (!user)
-      return renderLoginPage(res, email);
+      return renderLoginPage(res, email, 'Account is not exist!', 'error');
 
     bcrypt.compare(password, user.password)
       .then(matched => {
@@ -49,7 +55,7 @@ exports.postLogin = (req, res, next) => {
           });
         }
 
-        renderLoginPage(res, email);
+        renderLoginPage(res, email, 'Incorrect password!', 'error');
       })
       .catch(err => {
         res.redirect('/login');

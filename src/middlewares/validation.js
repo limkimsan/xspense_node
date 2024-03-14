@@ -29,3 +29,16 @@ exports.validateUser = () => {
       })
   ]
 }
+
+exports.validateLogin = () => {
+  return [
+    body('email')
+      .isEmail()
+      .withMessage('Please enter a valid email address')
+      .normalizeEmail()
+      .notEmpty(),
+    body('password')
+      .trim()
+      .notEmpty()
+  ]
+}

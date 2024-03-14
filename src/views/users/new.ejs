@@ -6,7 +6,6 @@
         <h1 class="card-title text-center">Create new user</h1>
         
         <div class="row">
-          <!-- <form class="col s12" action="/users/new" method="POST"> -->
           <form class="col s12" action="<%= path == '/users' ? '/users/new' : '/signup' %>" method="POST">
             <div class="row mt-2">
               <div class="col s12 input-field">
