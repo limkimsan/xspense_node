@@ -9,8 +9,8 @@
     <label class="form-label" for="transaction_type">Transaction type</label>
     <select class="form-control" name="transaction_type" id="category_transaction_type">
       <% for (let key in transactionTypes) { %>
-        <option value="<%= transactionTypes[key]%>" <%= oldInput.transaction_type == transactionTypes[key] ? 'selected' : '' %>>
-          <%= key %>
+        <option value="<%= key %>" <%= oldInput.transaction_type == transactionTypes[key] ? 'selected' : '' %>>
+          <%= transactionTypes[key] %>
         </option>
       <% } %>
     </select>
@@ -19,7 +19,7 @@
 <div class="row mt-3">
   <div class="col s12 input-field">
     <label class="form-label" for="category_order">Order</label>
-    <input class="form-control" name="category_order" id="category_order" placeholder="Enter category order"
+    <input class="form-control" name="order" id="category_order" placeholder="Enter category order"
       value="<%= oldInput.order %>" />
   </div>
 </div>
@@ -41,7 +41,7 @@
     </div>
     <div class="col-8">
       <label class="form-label" for="category_background_color">Background color</label>
-      <input class="form-control" type="color" name="background_color" id="category_background_color" style="width: 80px; padding: 2px;"
+      <input class="form-control" type="color" name="bg_color" id="category_background_color" style="width: 80px; padding: 2px;"
         value="<%= oldInput.background_color %>"
       />
     </div>

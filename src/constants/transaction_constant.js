@@ -1,4 +1,6 @@
 module.exports = {
-  income: 0,
-  expense: 1,
+  transactionTypes: {
+    0: 'income',
+    1: 'expense'
+  }
 };

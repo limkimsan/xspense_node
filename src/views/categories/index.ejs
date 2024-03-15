@@ -21,7 +21,7 @@
                     <div class="d-flex flex-row justify-content-between mb-3">
                       <div>
                         <h5 class="card-title">
-                          <b><%= category.order %></b>
+                          <b><%= category.order %>.</b>
                           <%= category.name %>
                         </h5>
 
@@ -34,13 +34,13 @@
                         </div>
                       </div>
                       <div>
-                        <span class="badge text-bg-<%= category.transaction_type == 'income' ? 'success' : 'danger' %>">
-                          <%= category.transaction_type %>
+                        <span class="badge text-bg-<%= category.transaction_type == 0 ? 'success' : 'danger' %>">
+                          <%= transactionTypes[category.transaction_type] %>
                         </span>
                       </div>
-                      <a href="/categories/<%= category.id %>" class="btn btn-primary">Edit</a>
-                      <a class="btn btn-danger">Delete</a>
                     </div>
+                    <a href="/categories/<%= category.id %>" class="btn btn-primary">Edit</a>
+                    <a class="btn btn-danger">Delete</a>
                   </div>
                 </div>
               </div>
@@ -51,4 +51,4 @@
         </div>
       </div>
     </div>
-    <%- include('../includes/end.ejs') %>
+<%- include('../includes/end.ejs') %>

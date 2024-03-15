@@ -1,7 +1,7 @@
+const crypto = require('crypto');
 const { validationResult } = require('express-validator');
 
 const Category = require('../../models/category');
-const transConst = require('../constants/user_constant');
 
 exports.getCategories = (req, res, next) => {
   Category.findAll()
@@ -19,7 +19,6 @@ exports.getCreateCategory = (req, res, next) => {
   res.render('categories/new', {
     path: '/categories',
     isEdit: false,
-    transactionTypes: {income: 0, expense: 1},
     oldInput: {
       name: '',
       transaction_type: 0,
@@ -34,25 +33,45 @@ exports.getCreateCategory = (req, res, next) => {
   });
 }
 
+const renderCategoryForm = (req, res, message, messageType) => {
+  res.render('categories/new', {
+    path: '/categories',
+    isEdit: false,
+    oldInput: {
+      name: req.body.name,
+      transaction_type: req.body.transaction_type,
+      order: req.body.order,
+      icon: req.body.icon,
+      icon_type: req.body.icon_type,
+      icon_color: req.body.icon_color,
+      background_color: req.body.bg_color
+    },
+    message: message,
+    messageType: 'error'
+  });
+}
+
 exports.postCreateCategory = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     const message = errors.array()[0].msg;
-    res.render('categories/new', {
-      path: '/categories',
-      isEdit: false,
-      transactionTypes: {income: 0, expense: 1},
-      oldInput: {
-        name: req.body.name,
-        transaction_type: req.body.transaction_type,
-        order: req.body.order,
-        icon: req.body.icon,
-        icon_type: req.body.icon_type,
-        icon_color: req.body.icon_color,
-        background_color: req.body.background_color
-      },
-      message: message,
-      messageType: 'error'
-    });
+    renderCategoryForm(req, res, message, 'error');
   }
+
+  Category.create({
+    id: crypto.randomUUID(),
+    name: req.body.name,
+    transaction_type: parseInt(req.body.transaction_type),
+    order: parseInt(req.body.order),
+    icon: req.body.icon,
+    icon_type: req.body.icon_type,
+    icon_color: req.body.icon_color,
+    bg_color: req.body.bg_color
+  })
+  .then(category => {
+    res.redirect('/categories');
+  })
+  .catch(err => {
+    renderCategoryForm(req, res, 'Failed to create category!', 'error');
+  });
 }
