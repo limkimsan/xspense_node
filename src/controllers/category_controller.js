@@ -12,3 +12,16 @@ exports.getCategories = (req, res, next) => {
       });
     });
 }
+
+exports.getCreateCategory = (req, res, next) => {
+  res.render('categories/new', {
+    path: '/categories',
+    isEdit: false,
+    transactionTypes: {income: 0, expense: 1},
+    oldInput: {
+      name: '',
+    },
+    message: '',
+    messageType: ''
+  });
+}

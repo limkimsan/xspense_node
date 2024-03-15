@@ -27,4 +27,6 @@ router.post('/users/:userId', validateEditUser(), isAuth, userController.postEdi
 
 router.get('/categories', isAuth, categoryController.getCategories);
 
+router.get('/categories/new', isAuth, categoryController.getCreateCategory);
+
 module.exports = router;
