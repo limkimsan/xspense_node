@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -17,9 +19,9 @@ const app = express();
 const sessionStore = new MySQLStore({
   host: 'localhost',
 	port: 3306,
-	user: 'root',
-	password: 'MySql@2024',
-	database: 'xspense-track'
+	user: process.env.DATABASE_USER,
+	password: process.env.DATABASE_PASSWORD,
+	database: process.env.DATABASE_NAME
 });
 
 const {
