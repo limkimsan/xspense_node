@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -6,7 +8,9 @@ const MySQLStore = require('express-mysql-session')(session);
 const { doubleCsrf } = require("csrf-csrf");
 const cookieParser = require('cookie-parser');
 
-const sequelize = require('./utils/database');
+// const sequelize = require('./utils/database');
+const sequelize = require('../config/database');
+
 const mainRoutes = require('./routes/main_route');
 const authRoutes = require('./routes/auth_route');
 const userConst = require('./constants/user_constant');
@@ -17,9 +21,9 @@ const app = express();
 const sessionStore = new MySQLStore({
   host: 'localhost',
 	port: 3306,
-	user: 'root',
-	password: 'MySql@2024',
-	database: 'xspense-track'
+	user: process.env.DATABASE_USER,
+	password: process.env.DATABASE_PASSWORD,
+	database: process.env.DATABASE_NAME
 });
 
 const {
