@@ -8,7 +8,9 @@ const MySQLStore = require('express-mysql-session')(session);
 const { doubleCsrf } = require("csrf-csrf");
 const cookieParser = require('cookie-parser');
 
-const sequelize = require('./utils/database');
+// const sequelize = require('./utils/database');
+const sequelize = require('../config/database');
+
 const mainRoutes = require('./routes/main_route');
 const authRoutes = require('./routes/auth_route');
 const userConst = require('./constants/user_constant');

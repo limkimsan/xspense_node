@@ -1,6 +1,6 @@
 const { check, body } =  require('express-validator');
 
-const User = require('../models/user');
+const User = require('../../models/user');
 
 exports.validateUser = () => {
   return [

@@ -2,7 +2,7 @@ const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 const { validationResult } = require('express-validator');
 
-const User = require('../models/user');
+const User = require('../../models/user');
 const userConst = require('../constants/user_constant');
 
 exports.getUsers = (req, res, next) => {
