@@ -5,7 +5,7 @@
       <div class="col s12 align-self-center">
         <div class="d-flex mb-4">
           <div class="flex-grow-1">
-            <h3>User Listing</h3>
+            <h3>Users</h3>
           </div>
           <div>
             <a href="/users/new" class="btn btn-primary">Create user</a>
@@ -18,7 +18,7 @@
               <div class="col-3 s3 m3 mt-3">
                 <div class="card">
                   <div class="card-body">
-                    <div class="d-flex flex-row justify-content-between">
+                    <div class="d-flex flex-row justify-content-between mb-3">
                       <h5 class="card-title">
                         <%= user.name %>
                       </h5>
@@ -39,7 +39,7 @@
               </div>
             <% } %>
           <% } else { %>
-            <h1>No user created</h1>
+            <h1 class="text-center">No user created</h1>
           <% } %>
         </div>
       </div>
