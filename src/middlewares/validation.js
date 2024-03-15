@@ -57,3 +57,20 @@ exports.validateLogin = () => {
       .notEmpty()
   ]
 }
+
+exports.validateCategory = () => {
+  return [
+    body('name')
+      .isString()
+      .notEmpty()
+      .withMessage('Please enter the category name'),
+    body('icon')
+      .isString()
+      .notEmpty()
+      .withMessage('Please enter the icon name'),
+    body('icon_type')
+      .isString()
+      .notEmpty()
+      .withMessage('Please enter the icon type')
+  ]
+}

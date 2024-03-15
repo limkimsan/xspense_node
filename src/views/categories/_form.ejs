@@ -1,7 +1,7 @@
 <div class="row mt-2">
   <div class="col s12 input-field">
     <label class="form-label" for="category_name">Category name</label>
-    <input class="form-control" name="category_name" id="category_name" placeholder="Enter category name" value="<%= oldInput.name %>" />
+    <input class="form-control" name="name" id="category_name" placeholder="Enter category name" value="<%= oldInput.name %>" />
   </div>
 </div>
 <div class="row mt-3">
@@ -9,7 +9,9 @@
     <label class="form-label" for="transaction_type">Transaction type</label>
     <select class="form-control" name="transaction_type" id="category_transaction_type">
       <% for (let key in transactionTypes) { %>
-        <option value="<%= transactionTypes[key]%>"><%= key %></option>
+        <option value="<%= transactionTypes[key]%>" <%= oldInput.transaction_type == transactionTypes[key] ? 'selected' : '' %>>
+          <%= key %>
+        </option>
       <% } %>
     </select>
   </div>
@@ -24,20 +26,24 @@
 <div class="row mt-3">
   <div class="col-4 input-field">
     <label class="form-label" for="category_icon">Icon</label>
-    <input class="form-control" name="category_icon" id="category_icon" placeholder="Enter icon name" />
+    <input class="form-control" name="icon" id="category_icon" placeholder="Enter icon name" />
   </div>
   <div class="col-4 input-field">
     <label class="form-label" for="category_icon_type">Icon type</label>
-    <input class="form-control" name="category_icon_type" id="category_icon_type" placeholder="Enter icon type" />
+    <input class="form-control" name="icon_type" id="category_icon_type" placeholder="Enter icon type" />
   </div>
   <div class="row col-4">
     <div class="col-4">
       <label class="form-label" for="category_icon_color">Icon color</label>
-      <input class="form-control" type="color" name="category_icon_color" id="category_icon_color" style="width: 80px; padding: 2px;" />
+      <input class="form-control" type="color" name="icon_color" id="category_icon_color" style="width: 80px; padding: 2px;"
+        value="<%= oldInput.icon_color %>"
+      />
     </div>
     <div class="col-8">
       <label class="form-label" for="category_background_color">Background color</label>
-      <input class="form-control" type="color" name="category_background_color" id="category_background_color" style="width: 80px; padding: 2px;" />
+      <input class="form-control" type="color" name="background_color" id="category_background_color" style="width: 80px; padding: 2px;"
+        value="<%= oldInput.background_color %>"
+      />
     </div>
   </div>
 </div>
