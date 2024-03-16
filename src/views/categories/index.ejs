@@ -15,7 +15,7 @@
         <div class="row justify-content-between">
           <% if (categories.length> 0) { %>
             <% for (let category of categories) { %>
-              <div class="col-3 s3 m3 mt-3">
+              <article class="col-3 s3 m3 mt-3">
                 <div class="card">
                   <div class="card-body">
                     <div class="d-flex flex-row justify-content-between mb-3">
@@ -27,7 +27,7 @@
 
                         <% const iconColor = category.icon_color ? category.icon_color : '#000000' %>
                         <% const bgColor = category.bg_color ? category.bg_color : 'gray' %>
-                        <div class="d-flex justify-content-center align-items-center" style="width: 40px; height: 40px; border-radius: 10px; background-color: <%= bgColor %>; color: <%= iconColor %>">
+                        <div class="d-flex justify-content-center align-items-center" style="width: 40px; height: 40px; border-radius: 10px; border: 0.5px solid gray; background-color: <%= bgColor %>; color: <%= iconColor %>">
                           Icon
                         </div>
                       </div>
@@ -45,7 +45,7 @@
                     </button>
                   </div>
                 </div>
-              </div>
+              </article>
             <% } %>
           <% } else { %>
             <h1 class="text-center">No category created</h1>

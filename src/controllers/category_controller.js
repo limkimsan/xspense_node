@@ -129,17 +129,14 @@ exports.postEditCategory = (req, res, next) => {
 }
 
 exports.deleteCategory = (req, res, next) => {
-  console.log('=== delete category ======');
-
   Category.findOne({ where: { id: req.params.categoryId } })
     .then(category => {
-      if (!category) {
-        return res.status(404).json({ message: 'Delete category failed!', messageType: 'error' });
-      }
+      if (!category)
+        return res.status(404).json({ message: 'Delete category failed!' });
 
-      return category.destroy()
+      return category.destroy();
     })
     .then(response => {
-      res.status(200).json({ message: 'Delete category successfully!', messageType: 'success' });
+      res.status(200).json({ message: 'Delete product success!' });
     })
 }
