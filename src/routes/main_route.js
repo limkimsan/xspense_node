@@ -2,7 +2,8 @@ const express = require('express');
 
 const isAuth = require('../middlewares/is_auth');
 const userController = require('../controllers/user_controller');
-const { validateUser, validateEditUser } = require('../middlewares/validation');
+const categoryController = require('../controllers/category_controller');
+const { validateUser, validateEditUser, validateCategory } = require('../middlewares/validation');
 
 const router = express.Router();
 
@@ -18,10 +19,22 @@ router.get('/users', isAuth, userController.getUsers);
 
 router.get('/users/new', isAuth, userController.getCreateUser)
 
-router.post('/users/new', validateUser(), isAuth, userController.postCreateUser)
+router.post('/users/new', isAuth, validateUser(), userController.postCreateUser)
 
 router.get('/users/:userId', isAuth, userController.getEditUser)
 
-router.post('/users/:userId', validateEditUser(), isAuth, userController.postEditUser);
+router.post('/users/:userId', isAuth, validateEditUser(), userController.postEditUser);
+
+router.get('/categories', isAuth, categoryController.getCategories);
+
+router.get('/categories/new', isAuth, categoryController.getCreateCategory);
+
+router.post('/categories/new', isAuth, validateCategory(), categoryController.postCreateCategory);
+
+router.get('/categories/:categoryId', isAuth, categoryController.getEditCategory);
+
+router.post('/categories/:categoryId', isAuth, categoryController.postEditCategory);
+
+router.post('/delete-categories/:categoryId', isAuth, categoryController.deleteCategory);
 
 module.exports = router;

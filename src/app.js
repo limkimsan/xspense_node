@@ -8,12 +8,12 @@ const MySQLStore = require('express-mysql-session')(session);
 const { doubleCsrf } = require("csrf-csrf");
 const cookieParser = require('cookie-parser');
 
-// const sequelize = require('./utils/database');
 const sequelize = require('../config/database');
 
 const mainRoutes = require('./routes/main_route');
 const authRoutes = require('./routes/auth_route');
 const userConst = require('./constants/user_constant');
+const transConst = require('./constants/transaction_constant');
 
 const SECRET = 'my secret';
 const app = express();
@@ -32,7 +32,7 @@ const {
   getSecret: () => SECRET,
   size: 32,
   getTokenFromRequest: (req) => {
-    return req.body._csrf;
+    return req.body._csrf || req.headers["x-csrf-token"];  // req.headers["x-csrf-token"]: allow the controller to accept the csrf-token from the request header
   },
 });
 
@@ -56,6 +56,7 @@ app.use((req, res, next) => {
   res.locals.isPrimaryAdmin = (!!req.session.user && req.session.user.role == userConst.role.primary_admin) ? true : false;
   res.locals.user = req.session.user;
   res.locals.csrfToken = req.csrfToken();
+  res.locals.transactionTypes = transConst.transactionTypes
   next();
 });
 

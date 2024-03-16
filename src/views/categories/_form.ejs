@@ -1,0 +1,60 @@
+<div class="row mt-2">
+  <div class="col s12 input-field">
+    <label class="form-label" for="category_name">Category name</label>
+    <input class="form-control" name="name" id="category_name" placeholder="Enter category name" value="<%= oldInput.name %>" />
+  </div>
+</div>
+<div class="row mt-3">
+  <div class="col s12 input-field">
+    <label class="form-label" for="transaction_type">Transaction type</label>
+    <select class="form-control" name="transaction_type" id="category_transaction_type">
+      <% for (let key in transactionTypes) { %>
+        <option value="<%= key %>" <%= oldInput.transaction_type == transactionTypes[key] ? 'selected' : '' %>>
+          <%= transactionTypes[key] %>
+        </option>
+      <% } %>
+    </select>
+  </div>
+</div>
+<div class="row mt-3">
+  <div class="col s12 input-field">
+    <label class="form-label" for="category_order">Order</label>
+    <input class="form-control" name="order" id="category_order" placeholder="Enter category order"
+      value="<%= oldInput.order %>" />
+  </div>
+</div>
+<div class="row mt-3">
+  <div class="col-4 input-field">
+    <label class="form-label" for="category_icon">Icon</label>
+    <input class="form-control" name="icon" id="category_icon" placeholder="Enter icon name" value="<%= oldInput.icon %>" />
+  </div>
+  <div class="col-4 input-field">
+    <label class="form-label" for="category_icon_type">Icon type</label>
+    <input class="form-control" name="icon_type" id="category_icon_type" placeholder="Enter icon type" value="<%= oldInput.icon_type %>" />
+  </div>
+  <div class="row col-4">
+    <div class="col-4">
+      <label class="form-label" for="category_icon_color">Icon color</label>
+      <input class="form-control" type="color" name="icon_color" id="category_icon_color" style="width: 80px; padding: 2px;"
+        value="<%= oldInput.icon_color %>"
+      />
+    </div>
+    <div class="col-8">
+      <label class="form-label" for="category_background_color">Background color</label>
+      <input class="form-control" type="color" name="bg_color" id="category_background_color" style="width: 80px; padding: 2px;"
+        value="<%= oldInput.background_color %>"
+      />
+    </div>
+  </div>
+</div>
+<div class="row mt-4 me-0 justify-content-end">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+  <div class="col-1">
+    <a href="/categories" class="btn btn-danger">Cancel</a>
+  </div>
+  <div class="col-1">
+    <button type="submit" class="btn btn-primary">
+      <%= isEdit ? 'Update' : 'Create' %>
+    </button>
+  </div>
+</div>
