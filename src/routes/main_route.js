@@ -33,4 +33,6 @@ router.post('/categories/new', isAuth, validateCategory(), categoryController.po
 
 router.get('/categories/:categoryId', isAuth, categoryController.getEditCategory);
 
+router.post('/categories/:categoryId', isAuth, categoryController.postEditCategory);
+
 module.exports = router;

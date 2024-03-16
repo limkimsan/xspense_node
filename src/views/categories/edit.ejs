@@ -6,7 +6,7 @@
         <h1 class="card-title text-center">Edit category</h1>
 
         <div class="row">
-          <form class="col s12" action="/categories/new" method="POST">
+          <form class="col s12" action="/categories/<%= categoryId %>" method="POST">
             <%- include('./_form.ejs') %>
           </form>
         </div>

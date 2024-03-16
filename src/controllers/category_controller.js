@@ -88,7 +88,7 @@ exports.getEditCategory = (req, res, next) => {
       res.render('categories/edit', {
         path: '/categories',
         categoryId: req.params.categoryId,
-        isEdit: false,
+        isEdit: true,
         oldInput: {
           name: category.name,
           transaction_type: category.transaction_type,
@@ -102,4 +102,28 @@ exports.getEditCategory = (req, res, next) => {
         messageType: ''
       });
     })
+}
+
+exports.postEditCategory = (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    const message = errors.array()[0].msg;
+    renderCategoryForm(req, res, message, 'error');
+  }
+
+  Category.update({
+    name: req.body.name,
+    transaction_type: parseInt(req.body.transaction_type),
+    order: parseInt(req.body.order),
+    icon: req.body.icon,
+    icon_type: req.body.icon_type,
+    icon_color: req.body.icon_color,
+    bg_color: req.body.bg_color
+  }, { where: { id: req.params.categoryId } })
+  .then(cate => {
+    res.redirect('/categories');
+  })
+  .catch(err => {
+    renderCategoryForm(req, res, 'Failed to edit the category!', 'error');
+  });
 }
