@@ -27,9 +27,7 @@
 
                         <% const iconColor = category.icon_color ? category.icon_color : '#000000' %>
                         <% const bgColor = category.bg_color ? category.bg_color : 'gray' %>
-                        <div class="d-flex justify-content-center align-items-center"
-                          style="width: 40px; height: 40px; border-radius: 10px; background-color: <%= bgColor %>; color: <%= iconColor %>"
-                        />
+                        <div class="d-flex justify-content-center align-items-center" style="width: 40px; height: 40px; border-radius: 10px; background-color: <%= bgColor %>; color: <%= iconColor %>">
                           Icon
                         </div>
                       </div>
@@ -40,7 +38,11 @@
                       </div>
                     </div>
                     <a href="/categories/<%= category.id %>" class="btn btn-primary">Edit</a>
-                    <a class="btn btn-danger">Delete</a>
+                    <input type="hidden" name="categoryId" value="<%= category.id %>" />
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    <button class="btn btn-danger" type="button" onclick="deleteCategory(this)">
+                      Delete
+                    </button>
                   </div>
                 </div>
               </div>
@@ -52,3 +54,4 @@
       </div>
     </div>
 <%- include('../includes/end.ejs') %>
+<script src="/js/admin.js"></script>

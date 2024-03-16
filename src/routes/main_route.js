@@ -35,4 +35,6 @@ router.get('/categories/:categoryId', isAuth, categoryController.getEditCategory
 
 router.post('/categories/:categoryId', isAuth, categoryController.postEditCategory);
 
+router.post('/delete-categories/:categoryId', isAuth, categoryController.deleteCategory);
+
 module.exports = router;

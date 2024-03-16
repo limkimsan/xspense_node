@@ -32,7 +32,7 @@ const {
   getSecret: () => SECRET,
   size: 32,
   getTokenFromRequest: (req) => {
-    return req.body._csrf;
+    return req.body._csrf || req.headers["x-csrf-token"];
   },
 });
 
