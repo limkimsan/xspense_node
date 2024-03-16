@@ -31,4 +31,6 @@ router.get('/categories/new', isAuth, categoryController.getCreateCategory);
 
 router.post('/categories/new', isAuth, validateCategory(), categoryController.postCreateCategory);
 
+router.get('/categories/:categoryId', isAuth, categoryController.getEditCategory);
+
 module.exports = router;

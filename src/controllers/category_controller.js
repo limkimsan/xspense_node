@@ -75,3 +75,31 @@ exports.postCreateCategory = (req, res, next) => {
     renderCategoryForm(req, res, 'Failed to create category!', 'error');
   });
 }
+
+exports.getEditCategory = (req, res, next) => {
+  Category.findOne({ where: { id: req.params.categoryId } })
+    .then(category => {
+      if (!category)
+        return res.redirect('/categories');
+
+      return category.dataValues;
+    })
+    .then(category => {
+      res.render('categories/edit', {
+        path: '/categories',
+        categoryId: req.params.categoryId,
+        isEdit: false,
+        oldInput: {
+          name: category.name,
+          transaction_type: category.transaction_type,
+          order: category.order,
+          icon: category.icon,
+          icon_type: category.icon_type,
+          icon_color: category.icon_color,
+          background_color: category.bg_color
+        },
+        message: '',
+        messageType: ''
+      });
+    })
+}
