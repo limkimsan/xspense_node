@@ -10,7 +10,7 @@
         <% if (isLoggedIn && isPrimaryAdmin) { %>
           <a href="/users" class="nav-link <%= path === '/users' ? 'nav-link-active' : '' %>">Users</a>
           <a href="/categories" class="nav-link <%= path === '/categories' ? 'nav-link-active' : '' %>">Categories</a>
-          <a href="/api_keys" class="nav-link <%= path === '/api_keys' ? 'nav-link-active' : '' %>">API Keys</a>
+          <a href="/api-keys" class="nav-link <%= path === '/api-keys' ? 'nav-link-active' : '' %>">API Keys</a>
           <a href="/transactions" class="nav-link <%= path === '/transactions' ? 'nav-link-active' : '' %>">Transactions</a>
         <% } %>
         <% if (isLoggedIn) { %>

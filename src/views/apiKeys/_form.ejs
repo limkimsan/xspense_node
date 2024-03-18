@@ -1,0 +1,18 @@
+<div class="row mt-2">
+  <div class="col s12 input-field">
+    <label class="form-label">Name</label>
+    <input class="form-control" placeholder="Enter API key name" autofocus="true" name="name" />
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+  </div>
+</div>
+
+<div class="row mt-4 me-0 justify-content-end">
+  <div class="col-1">
+    <a href="/api-keys" class="btn btn-danger">Cancel</a>
+  </div>
+  <div class="col-1">
+    <button type="submit" class="btn btn-primary">
+      Create
+    </button>
+  </div>
+</div>

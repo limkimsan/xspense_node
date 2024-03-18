@@ -3,7 +3,8 @@ const express = require('express');
 const isAuth = require('../middlewares/is_auth');
 const userController = require('../controllers/user_controller');
 const categoryController = require('../controllers/category_controller');
-const { validateUser, validateEditUser, validateCategory } = require('../middlewares/validation');
+const apiKeyController = require('../controllers/api_key_controller');
+const { validateUser, validateEditUser, validateCategory, validateApiKey } = require('../middlewares/validation');
 
 const router = express.Router();
 
@@ -36,5 +37,11 @@ router.get('/categories/:categoryId', isAuth, categoryController.getEditCategory
 router.post('/categories/:categoryId', isAuth, categoryController.postEditCategory);
 
 router.post('/delete-categories/:categoryId', isAuth, categoryController.deleteCategory);
+
+router.get('/api-keys', isAuth, apiKeyController.getApiKeys);
+
+router.get('/api-keys/new', isAuth, apiKeyController.getCreateApiKey);
+
+router.post('/api-keys/new', isAuth, validateApiKey(), apiKeyController.postCreateApiKey);
 
 module.exports = router;

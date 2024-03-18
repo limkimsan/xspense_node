@@ -10,7 +10,7 @@ class User extends Model {
    * The `models/index` file will call this method automatically.
    */
   static associate(models) {
-    // define association here
+    // define association here 
   }
 }
 User.init({
@@ -28,6 +28,8 @@ User.init({
   modelName: 'User',
 });
 
-User.hasMany(ApiKey);
+User.associate = function(models) {
+  User.hasMany(models.ApiKey);
+}
 
 module.exports = User;

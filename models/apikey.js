@@ -21,6 +21,8 @@ ApiKey.init({
   modelName: 'ApiKey',
 });
 
-ApiKey.belongsTo(User);
+ApiKey.associate = function(models) {
+  ApiKey.belongsTo(models.User)
+}
 
 module.exports = ApiKey;
