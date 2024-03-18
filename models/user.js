@@ -1,6 +1,7 @@
 'use strict';
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
+const ApiKey = require('./apikey');
 
 class User extends Model {
   /**
@@ -26,5 +27,7 @@ User.init({
   sequelize,
   modelName: 'User',
 });
+
+User.hasMany(ApiKey);
 
 module.exports = User;
