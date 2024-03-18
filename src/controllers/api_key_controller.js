@@ -4,12 +4,16 @@ const { validationResult } = require('express-validator');
 const ApiKey = require('../../models/apikey');
 
 exports.getApiKeys = (req, res, next) => {
-  res.render('apiKeys/index', {
-    path: '/api-keys',
-    archived: false,
-    message: '',
-    messageType: ''
-  });
+  ApiKey.findAll()
+    .then(apiKeys => {
+      res.render('apiKeys/index', {
+        path: '/api-keys',
+        apiKeys: apiKeys,
+        archived: false,
+        message: '',
+        messageType: ''
+      });
+    });
 }
 
 exports.getCreateApiKey = (req, res, next) => {

@@ -11,8 +11,50 @@
             <a href="/api-keys/new" class="btn btn-primary">Create API key</a>
           </div>
         </div>
-
         <%- include('./_nav_tab.ejs') %>
+
+        <% if (apiKeys.length> 0) { %>
+          <div style="background-color: white; border-radius: 15px; padding-left: 16px; padding-right: 16px; margin-top: 20px;">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Key</th>
+                  <th scope="col">Status</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for (let i = 0; i < apiKeys.length; i++) { %>
+                  <% apiKey = apiKeys[i] %>
+                  <tr>
+                    <th scope="row">
+                      <%= i + 1 %>
+                    </th>
+                    <td>
+                      <%= apiKey.name %>
+                    </td>
+                    <td>
+                      <%= apiKey.apiKey %>
+                    </td>
+                    <td>
+                      <span class="badge text-bg-<%= apiKey.activated ? " success" : "danger" %>">
+                        <%= apiKey.activated ? "Available" : "Deactivated" %>
+                      </span>
+                    </td>
+                    <td class="text-end">
+                      <%- include('./_action_buttons.ejs') %>
+                      <!-- <%#= render "action_buttons" , api_key: api_key %> -->
+                    </td>
+                  </tr>
+                <% } %>
+              </tbody>
+            </table>
+          </div>
+          <% } else { %>
+            <h1 lass="text-center">No API key created</h1>
+          <% } %>
       </div>
     </div>
 <%- include('../includes/end.ejs') %>
