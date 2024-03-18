@@ -44,8 +44,7 @@
                       </span>
                     </td>
                     <td class="text-end">
-                      <%- include('./_action_buttons.ejs') %>
-                      <!-- <%#= render "action_buttons" , api_key: api_key %> -->
+                      <%- include('./_action_buttons.ejs', { apiKeyId: apiKey.id }) %>
                     </td>
                   </tr>
                 <% } %>

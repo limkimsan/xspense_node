@@ -19,6 +19,8 @@ exports.getApiKeys = (req, res, next) => {
 exports.getCreateApiKey = (req, res, next) => {
   res.render('apiKeys/new', {
     path: '/api-keys',
+    isEdit: true,
+    name: '',
     message: '',
     messageType: ''
   });
@@ -49,6 +51,58 @@ exports.postCreateApiKey = (req, res, next) => {
     res.render('apiKeys/new', {
       path: '/api-keys',
       message: 'Failed to create API key!',
+      messageType: 'error'
+    });
+  })
+}
+
+exports.getEditApiKey = (req, res, next) => {
+  ApiKey.findOne({ where: { id: req.params.apiKeyId } })
+    .then(apiKey => {
+      if (!apiKey)
+        return res.redirect('/api-keys');
+
+      return apiKey.dataValues;
+    })
+    .then(apiKey => {
+      res.render('apiKeys/edit', {
+        path: '/api-keys',
+        isEdit: true,
+        apiKeyId: req.params.apiKeyId,
+        name: apiKey.name,
+        message: '',
+        messageType: ''
+      })
+    })
+}
+
+exports.postEditApiKey = (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    const message = errors.array()[0].msg;
+    return res.render('apiKeys/edit', {
+      path: '/api-keys',
+      isEdit: true,
+      apiKeyId: req.params.apiKeyId,
+      name: req.body.name,
+      message: message,
+      messageType: 'error'
+    });
+  }
+
+  ApiKey.update({
+    name: req.body.name
+  }, { where: { id: req.params.apiKeyId } })
+  .then(apiKey => {
+    res.redirect('/api-keys');
+  })
+  .catch(err => {
+    return res.render('apiKeys/edit', {
+      path: '/api-keys',
+      isEdit: true,
+      apiKeyId: req.params.apiKeyId,
+      name: req.body.name,
+      message: 'Failed to edit the API key!',
       messageType: 'error'
     });
   })

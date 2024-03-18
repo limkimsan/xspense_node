@@ -3,10 +3,10 @@
   <%- include('../includes/body.ejs') %>
     <div class="container card">
       <div class="card-body">
-        <h1 class="card-title text-center">Create new API Key</h1>
+        <h1 class="card-title text-center">Edit API Key</h1>
 
         <div class="row">
-          <form class="col s12" action="/api-keys/new" method="POST">
+          <form class="col s12" action="/api-keys/<%= apiKeyId %>" method="POST">
             <%- include('./_form.ejs') %>
           </form>
         </div>

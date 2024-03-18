@@ -1,7 +1,7 @@
 <div class="row mt-2">
   <div class="col s12 input-field">
     <label class="form-label">Name</label>
-    <input class="form-control" placeholder="Enter API key name" autofocus="true" name="name" />
+    <input class="form-control" placeholder="Enter API key name" autofocus="true" name="name" value="<%= name %>" />
     <input type="hidden" name="_csrf" value="<%= csrfToken %>">
   </div>
 </div>
@@ -12,7 +12,7 @@
   </div>
   <div class="col-1">
     <button type="submit" class="btn btn-primary">
-      Create
+      <%= isEdit ? 'Update' : 'Create'%>
     </button>
   </div>
 </div>
