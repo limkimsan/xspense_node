@@ -21,7 +21,7 @@ exports.getApiKeys = (req, res, next) => {
 exports.getCreateApiKey = (req, res, next) => {
   res.render('apiKeys/new', {
     path: '/api-keys',
-    isEdit: true,
+    isEdit: false,
     name: '',
     message: '',
     messageType: ''

@@ -38,15 +38,15 @@ router.post('/categories/:categoryId', isAuth, categoryController.postEditCatego
 
 router.post('/delete-categories/:categoryId', isAuth, categoryController.deleteCategory);
 
-router.get('/api-keys/:archived?', isAuth, apiKeyController.getApiKeys);
-
 router.get('/api-keys/new', isAuth, apiKeyController.getCreateApiKey);
 
 router.post('/api-keys/new', isAuth, validateApiKey(), apiKeyController.postCreateApiKey);
 
-router.get('/api-keys/:apiKeyId', isAuth, apiKeyController.getEditApiKey);
+router.get('/api-keys/:archived?', isAuth, apiKeyController.getApiKeys);
 
-router.post('/api-keys/:apiKeyId/:activated?', isAuth, validateApiKey(), apiKeyController.postEditApiKey);
+router.get('/api-keys/edit/:apiKeyId', isAuth, apiKeyController.getEditApiKey);
+
+router.post('/api-keys/edit/:apiKeyId/:activated?', isAuth, validateApiKey(), apiKeyController.postEditApiKey);
 
 router.post('/archive-api-keys/:apiKeyId', isAuth, apiKeyController.postArchiveApiKey);
 

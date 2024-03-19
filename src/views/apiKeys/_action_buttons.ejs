@@ -12,7 +12,7 @@
   </form> 
 <% } else { %>
   <form class="form-inline" action="/api-keys/<%= apiKeyId %>/<%= apiKey.activated %>" method="POST">
-    <a href="/api-keys/<%= apiKeyId %>" class="btn btn-primary">
+    <a href="/api-keys/edit/<%= apiKeyId %>" class="btn btn-primary">
       <i class="fa fa-pencil-square-o"></i>
     </a>
     <input type="hidden" name="_csrf" value="<%= csrfToken %>">
