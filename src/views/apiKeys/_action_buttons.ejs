@@ -1,7 +1,15 @@
-<% if (!!apiKey.deletedAt) { %>
-  <a class="btn-btn-success">
-    <i class="fa-solid fa-pen-to-square"></i>
-  </a>
+<% if (apiKey.deletedAt) { %>
+  <form action="/api-keys/<%= apiKeyId %>/restore" method="POST">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <input type="hidden" name="apiKeyId" value="<%= apiKeyId %>" />
+    <button class="btn btn-success" type="button" onclick="restoreApiKey(this)">
+      <i class="fa fa-rotate-right"></i>
+    </button>
+
+    <button class="btn btn-danger" type="button" onclick="">
+      <i class="fa fa-trash"></i>
+    </button>
+  </form> 
 <% } else { %>
   <form class="form-inline" action="/api-keys/<%= apiKeyId %>/<%= apiKey.activated %>" method="POST">
     <a href="/api-keys/<%= apiKeyId %>" class="btn btn-primary">
@@ -11,8 +19,9 @@
     <button type="submit" class="btn btn-info">
       <i class="fa <%= apiKey.activated ? 'fa-eye' : 'fa-eye-slash' %>" style="color: white;"></i>
     </button>
-    <a class="btn btn-warning">
+    <input type="hidden" name="apiKeyId" value="<%= apiKeyId %>" />
+    <button class="btn btn-warning" type="button" onclick="archiveApiKey(this)">
       <i class="fa fa-archive" style="color: white;"></i>
-    </a>
+    </button>
   </form>
 <% } %>

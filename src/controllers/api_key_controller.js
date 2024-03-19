@@ -1,15 +1,17 @@
 const crypto = require('crypto');
 const { validationResult } = require('express-validator');
+const { Op } = require('sequelize');
 
 const ApiKey = require('../../models/apikey');
 
 exports.getApiKeys = (req, res, next) => {
-  ApiKey.findAll()
+  const query = !req.params.archived ? { [Op.eq]: null } : { [Op.ne]: null };
+  ApiKey.findAll({ where: { deletedAt: query } })
     .then(apiKeys => {
       res.render('apiKeys/index', {
         path: '/api-keys',
         apiKeys: apiKeys,
-        archived: false,
+        archived: !!req.params.archived ? true : false,
         message: '',
         messageType: ''
       });
@@ -110,4 +112,18 @@ exports.postEditApiKey = (req, res, next) => {
       messageType: 'error'
     });
   })
+}
+
+exports.postArchiveApiKey = (req, res, next) => {
+  ApiKey.destroy({ where: { id: req.params.apiKeyId } })
+    .then(response => {
+      res.status(200).json({ message: 'Delete API key success!' });
+    })
+}
+
+exports.postRestoreApiKey = (req, res, next) => {
+  ApiKey.restore({ where: { id: req.params.apiKeyId } })
+  .then(response => {
+    res.status(200).json({ message: 'Restore API key success!' });
+  });
 }

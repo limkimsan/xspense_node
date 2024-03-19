@@ -18,6 +18,7 @@ ApiKey.init({
   userId: DataTypes.STRING
 }, {
   sequelize,
+  paranoid: true,
   modelName: 'ApiKey',
 });
 
