@@ -3,13 +3,16 @@
     <i class="fa-solid fa-pen-to-square"></i>
   </a>
 <% } else { %>
-  <a href="/api-keys/<%= apiKeyId %>" class="btn btn-primary">
-    <i class="fa fa-pencil-square-o"></i>
-  </a>
-  <a class="btn btn-info">
-    <i class="fa <%= apiKey.activated ? 'fa-eye' : 'fa-eye-slash' %>" style="color: white;"></i>
-  </a>
-  <a class="btn btn-warning">
-    <i class="fa fa-archive" style="color: white;"></i>
-  </a>
+  <form class="form-inline" action="/api-keys/<%= apiKeyId %>/<%= apiKey.activated %>" method="POST">
+    <a href="/api-keys/<%= apiKeyId %>" class="btn btn-primary">
+      <i class="fa fa-pencil-square-o"></i>
+    </a>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <button type="submit" class="btn btn-info">
+      <i class="fa <%= apiKey.activated ? 'fa-eye' : 'fa-eye-slash' %>" style="color: white;"></i>
+    </button>
+    <a class="btn btn-warning">
+      <i class="fa fa-archive" style="color: white;"></i>
+    </a>
+  </form>
 <% } %>

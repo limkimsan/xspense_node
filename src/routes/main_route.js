@@ -46,6 +46,6 @@ router.post('/api-keys/new', isAuth, validateApiKey(), apiKeyController.postCrea
 
 router.get('/api-keys/:apiKeyId', isAuth, apiKeyController.getEditApiKey);
 
-router.post('/api-keys/:apiKeyId', isAuth, validateApiKey(), apiKeyController.postEditApiKey);
+router.post('/api-keys/:apiKeyId/:activated?', isAuth, validateApiKey(), apiKeyController.postEditApiKey);
 
 module.exports = router;

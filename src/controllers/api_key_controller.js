@@ -40,7 +40,7 @@ exports.postCreateApiKey = (req, res, next) => {
   ApiKey.create({
     id: crypto.randomUUID(),
     name: req.body.name,
-    activated: false,
+    activated: true,
     apiKey: crypto.randomBytes(16).toString('hex'),
     userId: req.session.user.id
   })
@@ -78,7 +78,7 @@ exports.getEditApiKey = (req, res, next) => {
 
 exports.postEditApiKey = (req, res, next) => {
   const errors = validationResult(req);
-  if (!errors.isEmpty()) {
+  if (!errors.isEmpty() && !req.params.activated) {
     const message = errors.array()[0].msg;
     return res.render('apiKeys/edit', {
       path: '/api-keys',
@@ -89,10 +89,14 @@ exports.postEditApiKey = (req, res, next) => {
       messageType: 'error'
     });
   }
+  
+  let params = {};
+  if (!!req.body.name)
+    params = { name: req.body.name }
+  else if (!!req.params.activated)
+    params = { activated: req.params.activated === 'false' ? true : false }
 
-  ApiKey.update({
-    name: req.body.name
-  }, { where: { id: req.params.apiKeyId } })
+  ApiKey.update(params, { where: { id: req.params.apiKeyId } })
   .then(apiKey => {
     res.redirect('/api-keys');
   })
