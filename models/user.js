@@ -1,7 +1,6 @@
 'use strict';
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
-const ApiKey = require('./apikey');
 
 class User extends Model {
   /**
@@ -30,6 +29,7 @@ User.init({
 
 User.associate = function(models) {
   User.hasMany(models.ApiKey);
+  User.hasMany(models.Transaction);
 }
 
 module.exports = User;
