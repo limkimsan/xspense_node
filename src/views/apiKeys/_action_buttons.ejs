@@ -11,7 +11,7 @@
     </button>
   </form> 
 <% } else { %>
-  <form class="form-inline" action="/api-keys/<%= apiKeyId %>/<%= apiKey.activated %>" method="POST">
+  <form class="form-inline" action="/api-keys/edit/<%= apiKeyId %>/<%= apiKey.activated %>" method="POST">
     <a href="/api-keys/edit/<%= apiKeyId %>" class="btn btn-primary" data-toggle="tooltip" title="Edit">
       <i class="fa fa-pencil-square-o"></i>
     </a>

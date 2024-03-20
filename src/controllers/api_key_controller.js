@@ -117,26 +117,14 @@ exports.postEditApiKey = (req, res, next) => {
 exports.postArchiveApiKey = (req, res, next) => {
   ApiKey.destroy({ where: { id: req.params.apiKeyId } })
     .then(response => {
-      // res.status(200).json({ message: 'Delete API key success!' });
-
-      ApiKey.findAll({ where: { deletedAt: { [Op.ne]: null } }, paranoid: false })
-        .then(apiKeys => {
-          res.render('apiKeys/index', {
-            path: '/api-keys',
-            apiKeys: apiKeys,
-            archived: false,
-            message: 'Archive API key successfully!',
-            messageType: 'success'
-          });
-        });
-
+      res.redirect('/api-keys');
     })
 }
 
 exports.postRestoreApiKey = (req, res, next) => {
   ApiKey.restore({ where: { id: req.params.apiKeyId } })
   .then(response => {
-    res.status(200).json({ message: 'Restore API key success!' });
+    res.redirect('/api-keys');
   });
 }
 
