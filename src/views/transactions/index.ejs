@@ -1,0 +1,41 @@
+<%- include('../includes/head.ejs') %>
+  </head>
+  <%- include('../includes/body.ejs') %>
+    <div class="row">
+      <div class="col s12 align-self-center">
+        <div class="d-flex mb-4">
+          <div class="flex-grow-1">
+            <h3>Transactions</h3>
+          </div>
+          <div>
+            <a href="/transactions/new" class="btn btn-primary">Create transaction</a>
+          </div>
+        </div>
+
+        <div class="row justify-content-between">
+          <% if (transactions.length> 0) { %>
+            <% for (let transaction of transactions) { %>
+              <article class="col-3 s3 m3 mt-3">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="d-flex flex-row justify-content-between mb-3">
+                      
+                    </div>
+                    <a href="/transactions/<%= category.id %>" class="btn btn-primary">Edit</a>
+                    <input type="hidden" name="categoryId" value="<%= category.id %>" />
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    <button class="btn btn-danger" type="button" onclick="deleteCategory(this)">
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              </article>
+              <% } %>
+            <% } else { %>
+              <h1 class="text-center">No transaction created</h1>
+            <% } %>
+        </div>
+      </div>
+    </div>
+<%- include('../includes/end.ejs') %>
+<script src="/js/admin.js"></script>

@@ -4,6 +4,7 @@ const isAuth = require('../middlewares/is_auth');
 const userController = require('../controllers/user_controller');
 const categoryController = require('../controllers/category_controller');
 const apiKeyController = require('../controllers/api_key_controller');
+const transactionController = require('../controllers/transaction_controller');
 const { validateUser, validateEditUser, validateCategory, validateApiKey } = require('../middlewares/validation');
 
 const router = express.Router();
@@ -53,5 +54,7 @@ router.post('/archive-api-keys/:apiKeyId', isAuth, apiKeyController.postArchiveA
 router.post('/restore-api-keys/:apiKeyId', isAuth, apiKeyController.postRestoreApiKey);
 
 router.post('/delete-api-key/:apiKeyId', isAuth, apiKeyController.deleteApiKey);
+
+router.get('/transactions', isAuth, transactionController.getTransactions);
 
 module.exports = router;
