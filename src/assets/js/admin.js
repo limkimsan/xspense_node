@@ -20,6 +20,7 @@ const archiveApiKey = (btn) => {
   if (confirm('Do you really want to archive this API key?')) {
     const apiKeyId = btn.parentNode.querySelector('[name=apiKeyId]').value;
     const csrfToken = btn.parentNode.querySelector('[name=_csrf]').value;
+    const parentElement = btn.closest('tr');
 
     fetch(`/archive-api-keys/${apiKeyId}`, {
       method: 'POST',
@@ -27,7 +28,7 @@ const archiveApiKey = (btn) => {
         "x-csrf-token": csrfToken
       }
     }).then(resut => {
-      console.log('==== Archive api key success ====')
+      parentElement.parentNode.removeChild(parentElement);
     })
   }
 }
@@ -35,6 +36,7 @@ const archiveApiKey = (btn) => {
 const restoreApiKey = (btn) => {
   const apiKeyId = btn.parentNode.querySelector('[name=apiKeyId]').value;
   const csrfToken = btn.parentNode.querySelector('[name=_csrf]').value;
+  const parentElement = btn.closest('tr');
 
   fetch(`/restore-api-keys/${apiKeyId}`, {
     method: 'POST',
@@ -42,6 +44,6 @@ const restoreApiKey = (btn) => {
       "x-csrf-token": csrfToken
     }
   }).then(resut => {
-    console.log('==== restore api key success ====')
+    parentElement.parentNode.removeChild(parentElement);
   })
 }

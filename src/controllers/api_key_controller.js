@@ -6,7 +6,7 @@ const ApiKey = require('../../models/apikey');
 
 exports.getApiKeys = (req, res, next) => {
   const query = !req.params.archived ? { [Op.eq]: null } : { [Op.ne]: null };
-  ApiKey.findAll({ where: { deletedAt: query } })
+  ApiKey.findAll({ where: { deletedAt: query }, paranoid: false })
     .then(apiKeys => {
       res.render('apiKeys/index', {
         path: '/api-keys',

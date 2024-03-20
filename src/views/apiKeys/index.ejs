@@ -17,33 +17,33 @@
           <div style="background-color: white; border-radius: 15px; padding-left: 16px; padding-right: 16px; margin-top: 20px;">
             <table class="table">
               <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Name</th>
-                  <th scope="col">Key</th>
-                  <th scope="col">Status</th>
-                  <th scope="col"></th>
+                <tr class="d-flex">
+                  <th class="col-1">#</th>
+                  <th class="col-2">Name</th>
+                  <th class="col-6">Key</th>
+                  <th class="col-1">Status</th>
+                  <th class="col-2"></th>
                 </tr>
               </thead>
               <tbody>
                 <% for (let i = 0; i < apiKeys.length; i++) { %>
-                  <% apiKey = apiKeys[i] %>
-                  <tr>
-                    <th scope="row">
+                  <tr class="d-flex">
+                    <% apiKey = apiKeys[i] %>
+                    <td class="col-1">
                       <%= i + 1 %>
-                    </th>
-                    <td>
+                    </td>
+                    <td class="col-2">
                       <%= apiKey.name %>
                     </td>
-                    <td>
+                    <td class="col-6">
                       <%= apiKey.apiKey %>
                     </td>
-                    <td>
+                    <td class="col-1">
                       <span class="badge text-bg-<%= apiKey.activated ? "success" : "danger" %>">
                         <%= apiKey.activated ? "Available" : "Deactivated" %>
                       </span>
                     </td>
-                    <td class="text-end">
+                    <td class="text-end col-2">
                       <%- include('./_action_buttons.ejs', { apiKeyId: apiKey.id }) %>
                     </td>
                   </tr>
