@@ -74,3 +74,12 @@ exports.validateCategory = () => {
       .withMessage('Please enter the icon type')
   ]
 }
+
+exports.validateApiKey = () => {
+  return [
+    check('name')
+      .isString()
+      .notEmpty()
+      .withMessage('Please enter the name of the API key')
+  ]
+}

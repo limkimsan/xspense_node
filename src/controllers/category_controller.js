@@ -33,8 +33,8 @@ exports.getCreateCategory = (req, res, next) => {
   });
 }
 
-const renderCategoryForm = (req, res, message, messageType) => {
-  res.render('categories/new', {
+const renderCategoryForm = (path, req, res, message, messageType) => {
+  res.render(path, {
     path: '/categories',
     isEdit: false,
     oldInput: {
@@ -55,7 +55,7 @@ exports.postCreateCategory = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     const message = errors.array()[0].msg;
-    renderCategoryForm(req, res, message, 'error');
+    renderCategoryForm('categories/new', req, res, message, 'error');
   }
 
   Category.create({
@@ -72,7 +72,7 @@ exports.postCreateCategory = (req, res, next) => {
     res.redirect('/categories');
   })
   .catch(err => {
-    renderCategoryForm(req, res, 'Failed to create category!', 'error');
+    renderCategoryForm('categories/new', req, res, 'Failed to create category!', 'error');
   });
 }
 
@@ -108,7 +108,7 @@ exports.postEditCategory = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     const message = errors.array()[0].msg;
-    renderCategoryForm(req, res, message, 'error');
+    renderCategoryForm('categories/edit', req, res, message, 'error');
   }
 
   Category.update({
@@ -124,7 +124,7 @@ exports.postEditCategory = (req, res, next) => {
     res.redirect('/categories');
   })
   .catch(err => {
-    renderCategoryForm(req, res, 'Failed to edit the category!', 'error');
+    renderCategoryForm('categories/edit', req, res, 'Failed to edit the category!', 'error');
   });
 }
 

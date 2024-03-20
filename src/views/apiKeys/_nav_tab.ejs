@@ -1,0 +1,10 @@
+<ul class="nav nav-pills">
+  <% activeColor = !archived ? "white !important" : "black !important" %>
+  <% archivedColor = archived ? "white !important" : "black !important" %>
+  <li class="nav-item">
+    <a href="/api-keys" class="nav-link <%= !archived ? 'active' : '' %>" style="color: <%= activeColor %>">Active</a>
+  </li>
+  <li class="nav-item">
+    <a href="/api-keys/true" class="nav-link <%= !!archived ? 'active' : '' %>" style="color: <%= archivedColor %>">Archived</a>
+  </li>
+</ul>

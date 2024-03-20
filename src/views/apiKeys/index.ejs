@@ -1,0 +1,60 @@
+<%- include('../includes/head.ejs') %>
+  </head>
+  <%- include('../includes/body.ejs') %>
+    <div class="row">
+      <div class="col s12 align-self-center">
+        <div class="d-flex mb-4">
+          <div class="flex-grow-1">
+            <h3>API Keys</h3>
+          </div>
+          <div>
+            <a href="/api-keys/new" class="btn btn-primary">Create API key</a>
+          </div>
+        </div>
+        <%- include('./_nav_tab.ejs') %>
+
+        <% if (apiKeys.length> 0) { %>
+          <div style="background-color: white; border-radius: 15px; padding-left: 16px; padding-right: 16px; margin-top: 20px;">
+            <table class="table">
+              <thead>
+                <tr class="d-flex">
+                  <th class="col-1">#</th>
+                  <th class="col-2">Name</th>
+                  <th class="col-6">Key</th>
+                  <th class="col-1">Status</th>
+                  <th class="col-2"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for (let i = 0; i < apiKeys.length; i++) { %>
+                  <tr class="d-flex">
+                    <% apiKey = apiKeys[i] %>
+                    <td class="col-1">
+                      <%= i + 1 %>
+                    </td>
+                    <td class="col-2">
+                      <%= apiKey.name %>
+                    </td>
+                    <td class="col-6">
+                      <%= apiKey.apiKey %>
+                    </td>
+                    <td class="col-1">
+                      <span class="badge text-bg-<%= apiKey.activated ? "success" : "danger" %>">
+                        <%= apiKey.activated ? "Available" : "Deactivated" %>
+                      </span>
+                    </td>
+                    <td class="text-end col-2">
+                      <%- include('./_action_buttons.ejs', { apiKeyId: apiKey.id }) %>
+                    </td>
+                  </tr>
+                <% } %>
+              </tbody>
+            </table>
+          </div>
+        <% } else { %>
+          <h1 class="text-center">No API key created</h1>
+        <% } %>
+      </div>
+    </div>
+<%- include('../includes/end.ejs') %>
+<script src="/js/admin.js"></script>

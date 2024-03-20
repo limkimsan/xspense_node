@@ -1,6 +1,7 @@
 'use strict';
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
+const ApiKey = require('./apikey');
 
 class User extends Model {
   /**
@@ -9,7 +10,7 @@ class User extends Model {
    * The `models/index` file will call this method automatically.
    */
   static associate(models) {
-    // define association here
+    // define association here 
   }
 }
 User.init({
@@ -26,5 +27,9 @@ User.init({
   sequelize,
   modelName: 'User',
 });
+
+User.associate = function(models) {
+  User.hasMany(models.ApiKey);
+}
 
 module.exports = User;
