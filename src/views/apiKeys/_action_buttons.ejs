@@ -2,25 +2,25 @@
   <form action="/api-keys/<%= apiKeyId %>/restore" method="POST">
     <input type="hidden" name="_csrf" value="<%= csrfToken %>">
     <input type="hidden" name="apiKeyId" value="<%= apiKeyId %>" />
-    <button class="btn btn-success" type="button" onclick="restoreApiKey(this)">
+    <button class="btn btn-success" type="button" onclick="restoreApiKey(this)" data-toggle="tooltip" title="Restore">
       <i class="fa fa-rotate-right"></i>
     </button>
 
-    <button class="btn btn-danger" type="button" onclick="">
+    <button class="btn btn-danger" type="button" onclick="" data-toggle="tooltip" title="Delete">
       <i class="fa fa-trash"></i>
     </button>
   </form> 
 <% } else { %>
   <form class="form-inline" action="/api-keys/<%= apiKeyId %>/<%= apiKey.activated %>" method="POST">
-    <a href="/api-keys/edit/<%= apiKeyId %>" class="btn btn-primary">
+    <a href="/api-keys/edit/<%= apiKeyId %>" class="btn btn-primary" data-toggle="tooltip" title="Edit">
       <i class="fa fa-pencil-square-o"></i>
     </a>
     <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-    <button type="submit" class="btn btn-info">
+    <button type="submit" class="btn btn-info" data-toggle="tooltip" title="<%= apiKey.activated ? 'Deactivated' : 'Activated' %>">
       <i class="fa <%= apiKey.activated ? 'fa-eye' : 'fa-eye-slash' %>" style="color: white;"></i>
     </button>
     <input type="hidden" name="apiKeyId" value="<%= apiKeyId %>" />
-    <button class="btn btn-warning" type="button" onclick="archiveApiKey(this)">
+    <button class="btn btn-warning" type="button" onclick="archiveApiKey(this)" data-toggle="tooltip" title="Archive">
       <i class="fa fa-archive" style="color: white;"></i>
     </button>
   </form>
