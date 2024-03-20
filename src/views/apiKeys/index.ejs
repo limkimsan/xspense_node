@@ -35,8 +35,11 @@
                     <td class="col-2">
                       <%= apiKey.name %>
                     </td>
-                    <td class="col-6">
-                      <%= apiKey.apiKey %>
+                    <td class="col-6 row">
+                      <p class="col-7" id="apiKey"><%= apiKey.apiKey %></p>
+                      <button class="col-1 btn btn-light" onclick="copyApiKey(this)">
+                        <i class="fa fa-file-o"></i>
+                      </button>
                     </td>
                     <td class="col-1">
                       <span class="badge text-bg-<%= apiKey.activated ? "success" : "danger" %>">

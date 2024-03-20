@@ -64,3 +64,8 @@ const deleteApiKey = (btn) => {
     });
   }
 }
+
+const copyApiKey = (btn) => {
+  const apiKey = btn.parentNode.querySelector('[id=apiKey]').innerText;
+  navigator.clipboard.writeText(apiKey)
+}
