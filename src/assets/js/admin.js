@@ -47,3 +47,20 @@ const restoreApiKey = (btn) => {
     parentElement.parentNode.removeChild(parentElement);
   })
 }
+
+const deleteApiKey = (btn) => {
+  if (confirm('Do you really want to delete this API key?')) {
+    const apiKeyId = btn.parentNode.querySelector('[name=apiKeyId]').value;
+    const csrfToken = btn.parentNode.querySelector('[name=_csrf]').value;
+    const parentElement = btn.closest('tr');
+
+    fetch(`/delete-api-key/${apiKeyId}`, {
+      method: 'POST',
+      headers: {
+        "x-csrf-token": csrfToken
+      }
+    }).then(result => {
+      parentElement.parentNode.removeChild(parentElement);
+    });
+  }
+}

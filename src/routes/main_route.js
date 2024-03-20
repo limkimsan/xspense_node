@@ -52,4 +52,6 @@ router.post('/archive-api-keys/:apiKeyId', isAuth, apiKeyController.postArchiveA
 
 router.post('/restore-api-keys/:apiKeyId', isAuth, apiKeyController.postRestoreApiKey);
 
+router.post('/delete-api-key/:apiKeyId', isAuth, apiKeyController.deleteApiKey);
+
 module.exports = router;
