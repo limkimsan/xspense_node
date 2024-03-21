@@ -1,0 +1,26 @@
+<div class="card">
+  <div class="card-body">
+    <div class="d-flex flex-row justify-content-between mb-3">
+      <h5 class="card-title">
+        <b>
+          <%= transaction.currencyType == 0 ? "Riel" : "USD" %> <%= currencyFormat(transaction.amount, transaction.currencyType) %>
+        </b>
+      </h5>
+      <div><span class="badge text-bg-<%= transaction.transactionType == 0 ? "success" : "danger" %>"><%= transactionTypes[transaction.transactionType] %></span></div>
+    </div>
+    <h6 class="card-subtitle mb-2 text-muted">
+      <%= transaction.category.name %>
+    </h6>
+    <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Note: <%= transaction.note %></div>
+
+
+    <div class="mt-2">
+      <a href="/transactions/<%= transaction.id %>" class="btn btn-primary">Edit</a>
+      <input type="hidden" name="transactionId" value="<%= transaction.id %>" />
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <button class="btn btn-danger" type="button" onclick="deleteCategory(this)">
+        Delete
+      </button>
+    </div>
+  </div>
+</div>

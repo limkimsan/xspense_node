@@ -10,6 +10,7 @@
   <div class="col s12 input-field">
     <label class="form-label" for="transaction_currency_type">Currency type</label>
     <select class="form-select" name="currency_type" id="transaction_currency_type">
+      <option disabled selected value> -- Select a currency type -- </option>
       <% for (let key in currencyTypes) { %>
         <option value="<%= key %>" <%= oldInput.currency_type == key ? 'selected' : '' %>>
           <%= currencyTypes[key] %>
@@ -30,6 +31,7 @@
   <div class="col s12 input-field">
     <label class="form-label">Type</label>
     <select class="form-select" name="transaction_type" id="transaction_type_selector">
+      <option disabled selected value> -- Select a transaction type -- </option>
       <% for (let key in transactionTypes) { %>
         <option value="<%= key %>" <%= oldInput.transaction_type == key ? 'selected' : '' %>>
           <%= transactionTypes[key] %>
@@ -43,6 +45,7 @@
   <div class="col s12 input-field">
     <label class="form-label">Category</label>
     <select class="form-select" id="income_category">
+      <option disabled selected value> -- Select a category -- </option>
       <% for (let category of incomeCates) { %>
         <option value="<%= category.id %>" <%= oldInput.categoryId == category.id ? 'selected' : '' %>>
           <%= category.name %>
@@ -50,6 +53,7 @@
       <% } %>
     </select>
     <select class="form-select" id="expense_category">
+      <option disabled selected value> -- Select a category -- </option>
       <% for (let category of expenseCates) { %>
         <option value="<%= category.id %>" <%= oldInput.categoryId == category.id ? 'selected' : '' %>>
           <%= category.name %>

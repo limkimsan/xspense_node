@@ -22,9 +22,4 @@ Transaction.init({
   modelName: 'Transaction',
 });
 
-Transaction.associate = function(models) {
-  Transaction.belongsTo(models.Category);
-  Transaction.belongsTo(models.User);
-}
-
 module.exports = Transaction;

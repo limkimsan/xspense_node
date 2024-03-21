@@ -4,7 +4,7 @@ const sequelize = require('../config/database');
 
 class ApiKey extends Model {}
 
-ApiKey.init({
+module.exports = ApiKey.init({
   id: {
     type: DataTypes.UUID,
     allowNull: true,
@@ -14,15 +14,11 @@ ApiKey.init({
   apiKey: DataTypes.STRING,
   activated: DataTypes.BOOLEAN,
   deletedAt: DataTypes.DATE,
-  userId: DataTypes.STRING
+  userId: DataTypes.UUID
 }, {
   sequelize,
   paranoid: true,
   modelName: 'ApiKey',
 });
-
-ApiKey.associate = function(models) {
-  ApiKey.belongsTo(models.User)
-}
 
 module.exports = ApiKey;

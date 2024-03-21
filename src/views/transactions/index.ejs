@@ -1,4 +1,5 @@
 <%- include('../includes/head.ejs') %>
+  <script src="/js/number.js"></script>
   </head>
   <%- include('../includes/body.ejs') %>
     <div class="row">
@@ -16,19 +17,7 @@
           <% if (transactions.length> 0) { %>
             <% for (let transaction of transactions) { %>
               <article class="col-3 s3 m3 mt-3">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="d-flex flex-row justify-content-between mb-3">
-                      
-                    </div>
-                    <a href="/transactions/<%= transaction.id %>" class="btn btn-primary">Edit</a>
-                    <input type="hidden" name="transactionId" value="<%= transaction.id %>" />
-                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                    <button class="btn btn-danger" type="button" onclick="deleteCategory(this)">
-                      Delete
-                    </button>
-                  </div>
-                </div>
+                <%- include('./_card_item.ejs', { transaction: transaction }) %>
               </article>
               <% } %>
             <% } else { %>

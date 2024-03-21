@@ -22,8 +22,4 @@ Category.init({
   modelName: 'Category',
 });
 
-Category.associate = function(models) {
-  Category.hasMany(models.Transaction);
-}
-
 module.exports = Category;

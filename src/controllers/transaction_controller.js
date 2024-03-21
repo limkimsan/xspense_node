@@ -3,6 +3,7 @@ const { validationResult } = require('express-validator');
 
 const Transaction = require('../../models/transaction');
 const Category = require('../../models/category');
+const { currencyFormat } = require('../util/number');
 
 const renderTransactionForm = (path, req, res, isEdit, message, messageType) => {
   Category.findAll({ raw: true, where: { transaction_type: 0 } })
@@ -34,14 +35,23 @@ const renderTransactionForm = (path, req, res, isEdit, message, messageType) => 
 
 exports.getTransactions = (req, res, next) => {
   Transaction.findAll()
-    .then(transactions => {
+    .then(async transactions => {
+      let formattedTranscations = [];
+      for (let tran of transactions) {
+        const category = await tran.getCategory();
+        formattedTranscations.push({...tran.dataValues, category: category.dataValues });
+      }
+      return formattedTranscations;
+    })
+    .then(formattedTranscations => {
       res.render('transactions/index', {
         path: '/transactions',
-        transactions: transactions,
+        transactions: formattedTranscations,
+        currencyFormat: currencyFormat,
         message: '',
         messageType: ''
       });
-    })
+    });
 }
 
 exports.getCreateTransaction = (req, res, next) => {
