@@ -21,8 +21,8 @@
                     <div class="d-flex flex-row justify-content-between mb-3">
                       
                     </div>
-                    <a href="/transactions/<%= category.id %>" class="btn btn-primary">Edit</a>
-                    <input type="hidden" name="categoryId" value="<%= category.id %>" />
+                    <a href="/transactions/<%= transaction.id %>" class="btn btn-primary">Edit</a>
+                    <input type="hidden" name="transactionId" value="<%= transaction.id %>" />
                     <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                     <button class="btn btn-danger" type="button" onclick="deleteCategory(this)">
                       Delete

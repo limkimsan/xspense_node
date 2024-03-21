@@ -1,3 +1,4 @@
+const crypto = require('crypto');
 const { validationResult } = require('express-validator');
 
 const Transaction = require('../../models/transaction');
@@ -78,4 +79,21 @@ exports.postCreateTransaction = (req, res, next) => {
     const message = errors.array()[0].msg;
     return renderTransactionForm('transactions/new', req, res, false, message, 'error');
   }
+
+  Transaction.create({
+    id: crypto.randomUUID(),
+    amount: parseFloat(req.body.amount),
+    currencyType: parseInt(req.body.currency_type),
+    transactionDate: new Date(req.body.transaction_date),
+    transactionType: parseInt(req.body.transaction_type),
+    categoryId: req.body.categoryId,
+    note: req.body.note,
+    userId: req.session.user.id
+  })
+  .then(transaction => {
+    res.redirect('/transactions');
+  })
+  .catch(err => {
+    renderTransactionForm('transactions/new', req, res, false, 'Failed to create new transaction!', 'error');
+  })
 }

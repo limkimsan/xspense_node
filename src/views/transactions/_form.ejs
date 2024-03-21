@@ -11,7 +11,7 @@
     <label class="form-label" for="transaction_currency_type">Currency type</label>
     <select class="form-select" name="currency_type" id="transaction_currency_type">
       <% for (let key in currencyTypes) { %>
-        <option value="<%= key %>">
+        <option value="<%= key %>" <%= oldInput.currency_type == key ? 'selected' : '' %>>
           <%= currencyTypes[key] %>
         </option>
       <% } %>
@@ -22,7 +22,7 @@
 <div class="row mt-2">
   <div class="col s12 input-field">
     <label class="form-label" for="transaction_date">Transaction date</label>
-    <input type="date" class="form-control" name="transaction_date" />
+    <input type="date" class="form-control" name="transaction_date" value="<%= oldInput.transaction_date %>" />
   </div>
 </div>
 
@@ -31,7 +31,7 @@
     <label class="form-label">Type</label>
     <select class="form-select" name="transaction_type" id="transaction_type_selector">
       <% for (let key in transactionTypes) { %>
-        <option value="<%= key %>">
+        <option value="<%= key %>" <%= oldInput.transaction_type == key ? 'selected' : '' %>>
           <%= transactionTypes[key] %>
         </option>
       <% } %>
@@ -44,14 +44,14 @@
     <label class="form-label">Category</label>
     <select class="form-select" id="income_category">
       <% for (let category of incomeCates) { %>
-        <option value="<%= category.id %>">
+        <option value="<%= category.id %>" <%= oldInput.categoryId == category.id ? 'selected' : '' %>>
           <%= category.name %>
         </option>
       <% } %>
     </select>
     <select class="form-select" id="expense_category">
       <% for (let category of expenseCates) { %>
-        <option value="<%= category.id %>">
+        <option value="<%= category.id %>" <%= oldInput.categoryId == category.id ? 'selected' : '' %>>
           <%= category.name %>
         </option>
         <% } %>
@@ -63,7 +63,7 @@
 <div class="row mt-2">
   <div class="col s12 input-field">
     <label class="form-label" for="transaction_note">Note</label>
-    <textarea class="form-control" name="note" id="transaction_note" cols="30"></textarea>
+    <textarea class="form-control" name="note" id="transaction_note" cols="30"><%= oldInput.note %></textarea>
   </div>
 </div>
 
