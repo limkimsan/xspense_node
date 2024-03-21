@@ -5,7 +5,7 @@ const userController = require('../controllers/user_controller');
 const categoryController = require('../controllers/category_controller');
 const apiKeyController = require('../controllers/api_key_controller');
 const transactionController = require('../controllers/transaction_controller');
-const { validateUser, validateEditUser, validateCategory, validateApiKey } = require('../middlewares/validation');
+const { validateUser, validateEditUser, validateCategory, validateApiKey, validateTransactionForm } = require('../middlewares/validation');
 
 const router = express.Router();
 
@@ -58,5 +58,7 @@ router.post('/delete-api-key/:apiKeyId', isAuth, apiKeyController.deleteApiKey);
 router.get('/transactions', isAuth, transactionController.getTransactions);
 
 router.get('/transactions/new', isAuth, transactionController.getCreateTransaction);
+
+router.post('/transactions/new', isAuth, validateTransactionForm(), transactionController.postCreateTransaction);
 
 module.exports = router;

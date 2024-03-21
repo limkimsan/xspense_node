@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  if ($("#transaction_type_selector").val() == "expense")
+  if ($("#transaction_type_selector").val() == 1)
     $("#income_category").hide();
   else
     $("#expense_category").hide();

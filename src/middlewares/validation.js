@@ -83,3 +83,14 @@ exports.validateApiKey = () => {
       .withMessage('Please enter the name of the API key')
   ]
 }
+
+exports.validateTransactionForm = () => {
+  return [
+    body('amount')
+      .isFloat()
+      .withMessage('Please enter a positive number'),
+    body('transaction_date')
+      .isDate()
+      .withMessage('Please select a transaction date')
+  ]
+}
