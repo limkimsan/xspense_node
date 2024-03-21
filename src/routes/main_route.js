@@ -57,4 +57,6 @@ router.post('/delete-api-key/:apiKeyId', isAuth, apiKeyController.deleteApiKey);
 
 router.get('/transactions', isAuth, transactionController.getTransactions);
 
+router.get('/transactions/new', isAuth, transactionController.getCreateTransaction);
+
 module.exports = router;

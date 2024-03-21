@@ -1,0 +1,80 @@
+<div class="row mt-2">
+  <div class="col s12 input-field">
+    <label class="form-label" for="transaction_amount">Amount</label>
+    <input class="form-control" name="amount" id="transaction_amount" placeholder="Enter amount"
+      value="<%= oldInput.amount %>" />
+  </div>
+</div>
+
+<div class="row mt-2">
+  <div class="col s12 input-field">
+    <label class="form-label" for="transaction_currency_type">Currency type</label>
+    <select class="form-select" name="currency_type" id="transaction_currency_type">
+      <% for (let key in currencyTypes) { %>
+        <option value="<%= key %>">
+          <%= currencyTypes[key] %>
+        </option>
+      <% } %>
+    </select>
+  </div>
+</div>
+
+<div class="row mt-2">
+  <div class="col s12 input-field">
+    <label class="form-label" for="transaction_date">Transaction date</label>
+    <input type="date" class="form-control" />
+  </div>
+</div>
+
+<div class="row mt-2">
+  <div class="col s12 input-field">
+    <label class="form-label">Type</label>
+    <select class="form-select" name="transaction_type" id="transaction_type_selector">
+      <% for (let key in transactionTypes) { %>
+        <option value="<%= key %>">
+          <%= transactionTypes[key] %>
+        </option>
+      <% } %>
+    </select>
+  </div>
+</div>
+
+<div class="row mt-2">
+  <div class="col s12 input-field">
+    <label class="form-label">Category</label>
+    <select class="form-select" id="income_category">
+      <% for (let category of incomeCates) { %>
+        <option value="<%= category.id %>">
+          <%= category.name %>
+        </option>
+      <% } %>
+    </select>
+    <select class="form-select" id="expense_category">
+      <% for (let category of expenseCates) { %>
+        <option value="<%= category.id %>">
+          <%= category.name %>
+        </option>
+        <% } %>
+    </select>
+    <input type="hidden" name="category" id="transaction_category">
+  </div>
+</div>
+
+<div class="row mt-2">
+  <div class="col s12 input-field">
+    <label class="form-label" for="transaction_note">Note</label>
+    <textarea class="form-control" name="note" id="transaction_note" cols="30"></textarea>
+  </div>
+</div>
+
+<div class="row mt-4 me-0 justify-content-end">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+  <div class="col-1">
+    <a href="/transactions" class="btn btn-danger">Cancel</a>
+  </div>
+  <div class="col-1">
+    <button type="submit" class="btn btn-primary">
+      <%= isEdit ? 'Update' : 'Create' %>
+    </button>
+  </div>
+</div>

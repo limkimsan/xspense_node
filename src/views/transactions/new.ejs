@@ -1,0 +1,16 @@
+<%- include('../includes/head.ejs') %>
+  </head>
+  <%- include('../includes/body.ejs') %>
+    <div class="container card">
+      <div class="card-body">
+        <h1 class="card-title text-center">Create new transaction</h1>
+
+        <div class="row">
+          <form class="col s12" action="/transactions/new" method="POST">
+            <%- include('./_form.ejs') %>
+          </form>
+        </div>
+      </div>
+    </div>
+<%- include('../includes/end.ejs') %>
+<script src="/js/transaction.js"></script>

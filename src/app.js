@@ -56,6 +56,7 @@ app.use((req, res, next) => {
   res.locals.user = req.session.user;
   res.locals.csrfToken = req.csrfToken();
   res.locals.transactionTypes = transConst.transactionTypes;
+  res.locals.currencyTypes = transConst.currencyTypes;
   next();
 });
 
