@@ -1,10 +1,10 @@
 module.exports = {
   transactionTypes: {
-    0: 'income',
-    1: 'expense'
+    0: 'Income',
+    1: 'Expense'
   },
   currencyTypes: {
-    0: 'khr',
-    1: 'usd'
+    0: 'KHR',
+    1: 'USD'
   }
 };

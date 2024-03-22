@@ -23,7 +23,7 @@ const renderTransactionForm = (path, req, res, isEdit, message, messageType) => 
               currency_type: req.body.currency_type,
               transaction_date: req.body.transaction_date,
               transaction_type: req.body.transaction_type,
-              categoryId: req.body.categoryId,
+              category_id: req.body.categoryId,
               note: req.body.note
             },
             message: message,
@@ -69,10 +69,10 @@ exports.getCreateTransaction = (req, res, next) => {
             isEdit: false,
             oldInput: {
               amount: '',
-              currencyType: 0,
-              transactionDate: '',
-              transactionType: 0,
-              category: '',
+              currency_type: null,
+              transaction_date: '',
+              transaction_type: null,
+              category_id: null,
               note: ''
             },
             message: '',

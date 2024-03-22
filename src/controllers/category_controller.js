@@ -21,7 +21,7 @@ exports.getCreateCategory = (req, res, next) => {
     isEdit: false,
     oldInput: {
       name: '',
-      transaction_type: 0,
+      transaction_type: null,
       order: '',
       icon: '',
       icon_type: '',
