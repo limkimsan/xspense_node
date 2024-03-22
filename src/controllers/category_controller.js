@@ -55,7 +55,7 @@ exports.postCreateCategory = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     const message = errors.array()[0].msg;
-    renderCategoryForm('categories/new', req, res, message, 'error');
+    return renderCategoryForm('categories/new', req, res, message, 'error');
   }
 
   Category.create({
@@ -108,7 +108,7 @@ exports.postEditCategory = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     const message = errors.array()[0].msg;
-    renderCategoryForm('categories/edit', req, res, message, 'error');
+    return renderCategoryForm('categories/edit', req, res, message, 'error');
   }
 
   Category.update({

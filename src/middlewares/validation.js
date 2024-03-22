@@ -64,6 +64,9 @@ exports.validateCategory = () => {
       .isString()
       .notEmpty()
       .withMessage('Please enter the category name'),
+    body('transaction_type')
+      .notEmpty()
+      .withMessage('Please select the transaction type'),
     body('icon')
       .isString()
       .notEmpty()
@@ -100,6 +103,6 @@ exports.validateTransactionForm = () => {
       .withMessage('Please select the transaction type'),
     body('categoryId')
       .notEmpty()
-      .withMessage('Please select the transaction type')
+      .withMessage('Please select the category')
   ]
 }
