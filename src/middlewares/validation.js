@@ -89,8 +89,17 @@ exports.validateTransactionForm = () => {
     body('amount')
       .isFloat()
       .withMessage('Please enter a positive number'),
+    body('currency_type')
+      .notEmpty()
+      .withMessage('Please select the currency type'),
     body('transaction_date')
       .isDate()
-      .withMessage('Please select a transaction date')
+      .withMessage('Please select a transaction date'),
+    body('transaction_type')
+      .notEmpty()
+      .withMessage('Please select the transaction type'),
+    body('categoryId')
+      .notEmpty()
+      .withMessage('Please select the transaction type')
   ]
 }

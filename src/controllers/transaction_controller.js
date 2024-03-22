@@ -6,6 +6,11 @@ const Category = require('../../models/category');
 const { currencyFormat } = require('../util/number');
 
 const renderTransactionForm = (path, req, res, isEdit, message, messageType) => {
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0'); // Add leading zero for single-digit months
+  const day = String(date.getDate()).padStart(2, '0');
+
   Category.findAll({ raw: true, where: { transaction_type: 0 } })
     .then(incomeCates => {
       return incomeCates;
@@ -18,6 +23,7 @@ const renderTransactionForm = (path, req, res, isEdit, message, messageType) => 
             incomeCates: incomeCates,
             expenseCates: expenseCates,
             isEdit: isEdit,
+            maxDate: `${year}-${month}-${day}`,
             oldInput: {
               amount: req.body.amount,
               currency_type: req.body.currency_type,
@@ -89,7 +95,6 @@ exports.getCreateTransaction = (req, res, next) => {
 }
 
 exports.postCreateTransaction = (req, res, next) => {
-  console.log('== trans body = ', req.body);
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     const message = errors.array()[0].msg;
