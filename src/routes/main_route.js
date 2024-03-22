@@ -61,4 +61,6 @@ router.get('/transactions/new', isAuth, transactionController.getCreateTransacti
 
 router.post('/transactions/new', isAuth, validateTransactionForm(), transactionController.postCreateTransaction);
 
+router.get('/transactions/:transactionId', isAuth, transactionController.getEditTransaction);
+
 module.exports = router;

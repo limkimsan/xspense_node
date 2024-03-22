@@ -1,11 +1,12 @@
 const crypto = require('crypto');
 const { validationResult } = require('express-validator');
+const moment = require('moment');
 
 const Transaction = require('../../models/transaction');
 const Category = require('../../models/category');
 const { currencyFormat } = require('../util/number');
 
-const renderTransactionForm = (path, req, res, isEdit, message, messageType) => {
+const renderTransactionForm = (path, req, res, isEdit, transaction, message, messageType) => {
   const date = new Date();
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, '0'); // Add leading zero for single-digit months
@@ -18,19 +19,21 @@ const renderTransactionForm = (path, req, res, isEdit, message, messageType) => 
     .then(incomeCates => {
       Category.findAll({ raw: true, where: { transaction_type: 1 } })
         .then(expenseCates => {
+          const data = isEdit ? transaction : req.body;
           res.render(path, {
             path: '/transactions',
             incomeCates: incomeCates,
             expenseCates: expenseCates,
             isEdit: isEdit,
+            transactionId: !!transaction ? transaction.id : '',
             maxDate: `${year}-${month}-${day}`,
             oldInput: {
-              amount: req.body.amount,
-              currency_type: req.body.currency_type,
-              transaction_date: req.body.transaction_date,
-              transaction_type: req.body.transaction_type,
-              category_id: req.body.categoryId,
-              note: req.body.note
+              amount: data.amount,
+              currency_type: parseInt(data.currency_type),
+              transaction_date: moment(data.transactionDate).format('YYYY-MM-DD'),
+              transaction_type: parseInt(data.transaction_type),
+              category_id: data.categoryId,
+              note: data.note
             },
             message: message,
             messageType: messageType
@@ -98,14 +101,14 @@ exports.postCreateTransaction = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     const message = errors.array()[0].msg;
-    return renderTransactionForm('transactions/new', req, res, false, message, 'error');
+    return renderTransactionForm('transactions/new', req, res, false, null, message, 'error');
   }
 
   Transaction.create({
     id: crypto.randomUUID(),
     amount: parseFloat(req.body.amount),
     currencyType: parseInt(req.body.currency_type),
-    transactionDate: new Date(req.body.transaction_date),
+    transactionDate: new Date(req.body.transactionDate),
     transactionType: parseInt(req.body.transaction_type),
     categoryId: req.body.categoryId,
     note: req.body.note,
@@ -115,6 +118,19 @@ exports.postCreateTransaction = (req, res, next) => {
     res.redirect('/transactions');
   })
   .catch(err => {
-    renderTransactionForm('transactions/new', req, res, false, 'Failed to create new transaction!', 'error');
+    renderTransactionForm('transactions/new', req, res, false, null, 'Failed to create new transaction!', 'error');
   })
+}
+
+exports.getEditTransaction = (req, res, next) => {
+  Transaction.findOne({ where: { id: req.params.transactionId } })
+    .then(transaction => {
+      if (!transaction)
+        return res.redirect('/transactions');
+
+      return transaction.dataValues;
+    })
+    .then(transaction => {
+      renderTransactionForm('transactions/edit', req, res, true, transaction, '', '');
+    })
 }
