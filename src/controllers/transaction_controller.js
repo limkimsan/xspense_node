@@ -157,3 +157,16 @@ exports.postEditTransaction = (req, res, next) => {
     renderTransactionForm('transactions/edit', req, res, false, null, 'Failed to update the transaction', 'error');
   })
 }
+
+exports.deleteTransaction = (req, res, next) => {
+  Transaction.findOne({ where: { id: req.params.transactionId } })
+    .then(transaction => {
+      if (!transaction)
+        return res.status(404).json({ message: 'Delete transaction failed!' });
+
+      return transaction.destroy();
+    })
+    .then(response => {
+      res.status(200).json({ message: 'Delete transaction successfully!' });
+    })
+}

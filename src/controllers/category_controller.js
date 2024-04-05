@@ -137,6 +137,6 @@ exports.deleteCategory = (req, res, next) => {
       return category.destroy();
     })
     .then(response => {
-      res.status(200).json({ message: 'Delete product success!' });
+      res.status(200).json({ message: 'Delete product successfully!' });
     })
 }

@@ -65,4 +65,6 @@ router.get('/transactions/:transactionId', isAuth, transactionController.getEdit
 
 router.post('/transactions/:transactionId', isAuth, transactionController.postEditTransaction);
 
+router.post('/delete-transactions/:transactionId', isAuth, transactionController.deleteTransaction);
+
 module.exports = router;

@@ -18,7 +18,7 @@
       <a href="/transactions/<%= transaction.id %>" class="btn btn-primary">Edit</a>
       <input type="hidden" name="transactionId" value="<%= transaction.id %>" />
       <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-      <button class="btn btn-danger" type="button" onclick="deleteCategory(this)">
+      <button class="btn btn-danger" type="button" onclick="deleteTransaction(this)">
         Delete
       </button>
     </div>
