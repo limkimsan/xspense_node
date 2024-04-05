@@ -29,9 +29,9 @@ const renderTransactionForm = (path, req, res, isEdit, transaction, message, mes
             maxDate: `${year}-${month}-${day}`,
             oldInput: {
               amount: data.amount,
-              currency_type: parseInt(data.currency_type),
-              transaction_date: moment(data.transactionDate).format('YYYY-MM-DD'),
-              transaction_type: parseInt(data.transaction_type),
+              currency_type: parseInt(data.currencyType),
+              transaction_date: moment(data.transaction_date).format('YYYY-MM-DD'),
+              transaction_type: parseInt(data.transactionType),
               category_id: data.categoryId,
               note: data.note
             },
@@ -108,7 +108,7 @@ exports.postCreateTransaction = (req, res, next) => {
     id: crypto.randomUUID(),
     amount: parseFloat(req.body.amount),
     currencyType: parseInt(req.body.currency_type),
-    transactionDate: new Date(req.body.transactionDate),
+    transactionDate: new Date(req.body.transaction_date),
     transactionType: parseInt(req.body.transaction_type),
     categoryId: req.body.categoryId,
     note: req.body.note,
@@ -133,4 +133,27 @@ exports.getEditTransaction = (req, res, next) => {
     .then(transaction => {
       renderTransactionForm('transactions/edit', req, res, true, transaction, '', '');
     })
+}
+
+exports.postEditTransaction = (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    const message = errors.array()[0].msg;
+    return renderTransactionForm('transactions/edit', req, res, false, null, message, 'error');
+  }
+
+  Transaction.update({
+    amount: parseFloat(req.body.amount),
+    currencyType: parseInt(req.body.currency_type),
+    transactionDate: new Date(req.body.transaction_date),
+    transactionType: parseInt(req.body.transaction_type),
+    categoryId: req.body.categoryId,
+    note: req.body.note,
+  }, { where: { id: req.params.transactionId } })
+  .then(trans => {
+    res.redirect('/transactions');
+  })
+  .catch(err => {
+    renderTransactionForm('transactions/edit', req, res, false, null, 'Failed to update the transaction', 'error');
+  })
 }
