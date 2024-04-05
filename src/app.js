@@ -13,6 +13,7 @@ const mainRoutes = require('./routes/main_route');
 const authRoutes = require('./routes/auth_route');
 const userConst = require('./constants/user_constant');
 const transConst = require('./constants/transaction_constant');
+const errorsController = require('./controllers/errors_controller');
 
 const modelsAssociation = require('../config/models_association')
 
@@ -64,6 +65,8 @@ app.use((req, res, next) => {
 
 app.use(mainRoutes);
 app.use(authRoutes);
+
+app.use(errorsController.get404);
 
 modelsAssociation();
 
