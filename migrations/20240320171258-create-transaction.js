@@ -2,25 +2,32 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('ApiKeys', {
+    await queryInterface.createTable('Transactions', {
       id: {
-        type: Sequelize.UUID,
         allowNull: false,
         primaryKey: true,
+        type: Sequelize.UUID
       },
-      name: {
+      amount: {
+        allowNull: false,
+        type: Sequelize.FLOAT
+      },
+      currencyType: {
+        type: Sequelize.INTEGER
+      },
+      note: {
         type: Sequelize.STRING
       },
-      apiKey: {
-        type: Sequelize.STRING
+      transactionType: {
+        type: Sequelize.INTEGER
       },
-      activated: {
-        type: Sequelize.BOOLEAN
-      },
-      deletedAt: {
+      transactionDate: {
         type: Sequelize.DATE
       },
       userId: {
+        type: Sequelize.UUID
+      },
+      categoryId: {
         type: Sequelize.UUID
       },
       createdAt: {
@@ -34,6 +41,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('ApiKeys');
+    await queryInterface.dropTable('Transactions');
   }
 };

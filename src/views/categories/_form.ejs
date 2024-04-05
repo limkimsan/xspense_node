@@ -7,9 +7,12 @@
 <div class="row mt-3">
   <div class="col s12 input-field">
     <label class="form-label" for="transaction_type">Transaction type</label>
-    <select class="form-control" name="transaction_type" id="category_transaction_type">
+    <select class="form-select" name="transaction_type" id="category_transaction_type">
+      <% if (oldInput.transaction_type == null) { %>
+        <option disabled selected value> -- Select a transaction type -- </option>
+      <% } %>
       <% for (let key in transactionTypes) { %>
-        <option value="<%= key %>" <%= oldInput.transaction_type == transactionTypes[key] ? 'selected' : '' %>>
+        <option value="<%= key %>" <%= oldInput.transaction_type == key ? 'selected' : '' %>>
           <%= transactionTypes[key] %>
         </option>
       <% } %>

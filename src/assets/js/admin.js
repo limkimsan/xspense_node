@@ -16,6 +16,24 @@ const deleteCategory = (btn) => {
   }
 }
 
+const deleteTransaction = (btn) => {
+  if (confirm('Do you really want to delete this transaction?')) {
+    const transactionId = btn.parentNode.querySelector('[name=transactionId]').value;
+    const csrfToken = btn.parentNode.querySelector('[name=_csrf]').value;
+    const parentElement = btn.closest('article');
+
+    fetch(`/delete-transactions/${transactionId}`, {
+      method: 'POST',
+      headers: {
+        "x-csrf-token": csrfToken
+      }
+    })
+    .then(result => {
+      parentElement.parentNode.removeChild(parentElement);
+    });
+  }
+}
+
 const archiveApiKey = (btn) => {
   if (confirm('Do you really want to archive this API key?')) {
     const apiKeyId = btn.parentNode.querySelector('[name=apiKeyId]').value;
@@ -63,4 +81,9 @@ const deleteApiKey = (btn) => {
       parentElement.parentNode.removeChild(parentElement);
     });
   }
+}
+
+const copyApiKey = (btn) => {
+  const apiKey = btn.parentNode.querySelector('[id=apiKey]').innerText;
+  navigator.clipboard.writeText(apiKey)
 }

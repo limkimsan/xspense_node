@@ -64,6 +64,9 @@ exports.validateCategory = () => {
       .isString()
       .notEmpty()
       .withMessage('Please enter the category name'),
+    body('transaction_type')
+      .notEmpty()
+      .withMessage('Please select the transaction type'),
     body('icon')
       .isString()
       .notEmpty()
@@ -81,5 +84,25 @@ exports.validateApiKey = () => {
       .isString()
       .notEmpty()
       .withMessage('Please enter the name of the API key')
+  ]
+}
+
+exports.validateTransactionForm = () => {
+  return [
+    body('amount')
+      .isFloat()
+      .withMessage('Please enter a positive number'),
+    body('currency_type')
+      .notEmpty()
+      .withMessage('Please select the currency type'),
+    body('transaction_date')
+      .isDate()
+      .withMessage('Please select a transaction date'),
+    body('transaction_type')
+      .notEmpty()
+      .withMessage('Please select the transaction type'),
+    body('categoryId')
+      .notEmpty()
+      .withMessage('Please select the category')
   ]
 }

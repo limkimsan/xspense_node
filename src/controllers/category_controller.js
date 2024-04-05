@@ -21,7 +21,7 @@ exports.getCreateCategory = (req, res, next) => {
     isEdit: false,
     oldInput: {
       name: '',
-      transaction_type: 0,
+      transaction_type: null,
       order: '',
       icon: '',
       icon_type: '',
@@ -55,7 +55,7 @@ exports.postCreateCategory = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     const message = errors.array()[0].msg;
-    renderCategoryForm('categories/new', req, res, message, 'error');
+    return renderCategoryForm('categories/new', req, res, message, 'error');
   }
 
   Category.create({
@@ -108,7 +108,7 @@ exports.postEditCategory = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     const message = errors.array()[0].msg;
-    renderCategoryForm('categories/edit', req, res, message, 'error');
+    return renderCategoryForm('categories/edit', req, res, message, 'error');
   }
 
   Category.update({
@@ -137,6 +137,6 @@ exports.deleteCategory = (req, res, next) => {
       return category.destroy();
     })
     .then(response => {
-      res.status(200).json({ message: 'Delete product success!' });
+      res.status(200).json({ message: 'Delete product successfully!' });
     })
 }
