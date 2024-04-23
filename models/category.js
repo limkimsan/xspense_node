@@ -11,6 +11,7 @@ Category.init({
     primaryKey: true
   },
   name: DataTypes.STRING,
+  name_km: DataTypes.STRING,
   transaction_type: DataTypes.INTEGER,
   order: DataTypes.INTEGER,
   icon: DataTypes.STRING,
