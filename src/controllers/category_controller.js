@@ -21,6 +21,7 @@ exports.getCreateCategory = (req, res, next) => {
     isEdit: false,
     oldInput: {
       name: '',
+      name_km: '',
       transaction_type: null,
       order: '',
       icon: '',
@@ -39,6 +40,7 @@ const renderCategoryForm = (path, req, res, message, messageType) => {
     isEdit: false,
     oldInput: {
       name: req.body.name,
+      name_km: req.body.name_km,
       transaction_type: req.body.transaction_type,
       order: req.body.order,
       icon: req.body.icon,
@@ -61,6 +63,7 @@ exports.postCreateCategory = (req, res, next) => {
   Category.create({
     id: crypto.randomUUID(),
     name: req.body.name,
+    name_km: req.body.name_km,
     transaction_type: parseInt(req.body.transaction_type),
     order: parseInt(req.body.order),
     icon: req.body.icon,
@@ -91,6 +94,7 @@ exports.getEditCategory = (req, res, next) => {
         isEdit: true,
         oldInput: {
           name: category.name,
+          name_km: category.name_km,
           transaction_type: category.transaction_type,
           order: category.order,
           icon: category.icon,
@@ -113,6 +117,7 @@ exports.postEditCategory = (req, res, next) => {
 
   Category.update({
     name: req.body.name,
+    name_km: req.body.name_km,
     transaction_type: parseInt(req.body.transaction_type),
     order: parseInt(req.body.order),
     icon: req.body.icon,
